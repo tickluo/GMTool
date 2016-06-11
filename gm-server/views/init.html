@@ -1,0 +1,21 @@
+<% include header.html %>
+<script src="/javascripts/angular.min.js"></script>
+<script src="/javascripts/init.js"></script>
+
+<div   id="ng-app" class="container-fluid" ng-app="myApp" ng-controller="InitController">
+    <div class="row-fluid">
+        <div class="span12">
+            <ul class="breadcrumb">
+                <li> <a href="#moonRobot">创建机器人</a> <span class="divider"></span> </li>
+            </ul>
+                <legend ><a name="moonRobot">创建机器人(3000个)</a></legend>
+                <label ng-model="message"></label>
+                <label>
+                    Account server IP <input type="text" ng-model="accSrv" value="10.24.100.203" />
+                    Game server IP <input type="text"   ng-model="astSrv"  value="10.24.100.203"/>
+                    <button type="submit" class="btn" ng-click="createMoonRobot()" ng-disabled="disableCreateButton">创建</button> </label>
+                </label>
+        </div>
+    </div>
+</div>
+<% include footer.html %>

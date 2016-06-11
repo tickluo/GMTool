@@ -1,0 +1,24 @@
+
+<div class="user-layout " layout="row" layout-margin layout-align="center center">
+    <div flex="grow">
+        <md-icon md-svg-src="{{::ctrl.user.avatar}}" class="avatar-init"></md-icon>
+    </div>
+    <div flex="grow" layout="column">
+        <pre class="md-subhead" style="color: yellow">{{::ctrl.user.role}}</pre>
+        <ul id="account-dropable-menu">
+            <li>
+                <div class="account-name-style" layout="row" >
+                    <span>{{::ctrl.user.userName}}</span>
+                    <span class="select-triangle">▼</span>
+                    <!--<md-icon md-svg-icon="asset/svg/menu.svg"></md-icon>-->
+                </div>
+                <ul>
+                    <li><a href="#">User Manage</a></li>
+                    <li><a href="#">User Setting</a></li>
+                    <li><a ng-click="ctrl.logOut()">Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+

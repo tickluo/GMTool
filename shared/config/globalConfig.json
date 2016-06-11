@@ -1,0 +1,16 @@
+{
+    "development": {
+        "operator": "zhuopai",
+        "accServers": [{
+            "hostForInternal": "10.24.100.202",
+            "portForInternal": 3002
+        }]
+    },
+    "production": {
+        "operator": "zhuopai",
+        "accServers": [{
+            "hostForInternal": "10.24.100.202",
+            "portForInternal": 3002
+        }]
+    }
+}

@@ -1,0 +1,160 @@
+<% include header.html %>
+<script src="/javascripts/angular.min.js"></script>
+<script src="/javascripts/account.js"></script>
+
+<div   id="ng-app" class="container-fluid" ng-app="myApp" ng-controller="AccountController">
+    <div class="row-fluid">
+        <div class="span12">
+            <ul class="breadcrumb">
+                <li> <a href="#find">查找</a> <span class="divider"></span> </li>
+                <li> <a href="#info">基本信息</a> <span class="divider"></span> </li>
+                <li> <a href="#hero">角色</a> <span class="divider"></span> </li>
+                <li> <a href="#item">道具</a> <span class="divider"></span> </li>
+                <li>  <a href="#transformer">元神</a> <span class="divider"></span> </li>
+            </ul>
+            <div >
+                    <legend ><a anme="find">查找</a></a></legend>
+                    <select name="input_searchType" id="input_searchType" >
+                        <option value="uid">UID</option>
+                        <option value="nuid">NumberUID</option>
+                        <option value="openId">OpenID</option>
+                        <option value="username">User Name</option>
+                        <option value="nickname">Nick Name</option>
+                    </select>
+                    <input name="input_searchVal" id="input_searchVal" value="" /><button ng-click="searchPlayer()" >查找</button><br><br>
+
+                    <span class="help-block">{{message}}</span>
+            </div>
+
+            <legend><a anme="info">基本信息</a></legend>
+            <ul>
+                <li> 玩家名:{{user.userName}} </li>
+                <li> openId:{{user.openId}} </li>
+                <li> uid:{{user.uid}} </li>
+                <li> 登陆时间: {{user.date}}</li>
+                <li> 所在地图ID: {{user.data.areaId}}</li>
+                <li> 角色名称: {{user.data.nickName}}</li>
+                <li> 等级: {{user.data.level}}</li>
+                <li> 角色AvatarID:{{user.data.avatarId}} </li>
+                <li> 签到信息:{{user.data.signin}} ,签到时间:{{getLocalTime(user.data.signin)}}</li>
+                <li> GM操作:
+                    <br>
+                    <button ng-click="passLevel()" >通关关卡</button>:<input name="input_level" id="input_level" value="" /><br><br>
+                    <button ng-click="passAllLevel()" >通关所有关卡</button><br><br>
+                    <button ng-click="addAllSpirit()" >添加所有元神</button><br><br>
+                    <button ng-click="setHeroLevel()" >设置等级</button>:<input name="input_playerlevel" id="input_playerlevel" value="10" /><br><br>
+                    <button ng-click="setGuideStep()" >设置新手引导步骤</button>:<input name="input_guideStep" id="input_guideStep" value="0" /><br><br>
+                    <button ng-click="kick()" >踢下线</button><br><br>
+                </li>
+            </ul>
+            <table class="table table-hover">
+                <thead> <tr> <th> 装备栏位 </th> <th> 装备ID </th> <th> 强化 </th></tr> </thead>
+                <tbody>
+                <tr ng-repeat="(k,v) in hero.equipments">
+                    <td> {{k}} </td>
+                    <td>{{v.id}}  </td>
+                    <td>{{v.enhanced}}  </td>
+                </tr> </tbody>
+            </table>
+            <table class="table table-hover">
+                <thead> <tr> <th> 技能ID </th> <th> 技能名称 </th> </tr> </thead>
+                <tbody>
+                <tr ng-repeat="skill in hero.skills">
+                    <td>{{skill.id}}  </td>
+                    <td> {{skill.name}}</td>
+                </tr> </tbody>
+            </table>
+
+            <table class="table table-hover">
+                <thead> <tr> <th> 被动技能ID </th>   <th> 被动技能名称 </th> <th> 是否使用 </th></tr> </thead>
+                <tbody>
+                <tr ng-repeat="pskill in hero.pskills">
+                    <td>{{pskill.id}}  </td>
+                    <td>{{pskill.name}}  </td>
+                    <td>{{pskill.use}}  </td>
+
+                </tr> </tbody>
+            </table>
+
+            <legend ><a name="item">道具</a></legend>
+             <label>
+                 道具ID <input type="text" ng-model="itemId"/>
+                 数量 <input type="text"   ng-model="itemCount" />
+                 <button type="submit" class="btn" ng-click="addItem()">添加</button> </label>
+                <button type="submit" class="btn" ng-click="addAllItem500()">添加所有道具500个</button> </label>
+            <table class="table table-hover">
+                <thead> <tr> <th> 道具ID </th>
+                    <th> 数量 </th></tr> </thead>
+                <tbody>
+                <tr ng-repeat="(k,v)  in user.data.items">
+                    <td> {{k}} </td>
+                    <td> {{v.count}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <legend ><a name="magic">法宝</a></legend>
+            <label>
+                法宝ID <input type="text" ng-model="magicId"/>
+                数量 <input type="text"   ng-model="magicCount" />
+                <button type="submit" class="btn" ng-click="addMagic()">添加</button> </label>
+                <button type="submit" class="btn" ng-click="addAllMagic500()">添加所有法宝500个</button> </label>
+            <table class="table table-hover">
+                <thead> <tr> <th> ID </th>
+                    <th> 数量 </th></tr> </thead>
+                <tbody>
+                <tr ng-repeat="(k,v)  in user.data.magics">
+                    <td> {{k}} </td>
+                    <td> {{v.count}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <legend><a name="transformer">元神</a></legend>
+            <form class="form-inline">
+                <label>元神ID <input type="text" ng-model="newTId"/>
+                    <button type="submit" class="btn"  ng-click="addSpirit()" >添加</button> </label> <span class="help-block">.</span>
+            </form>
+
+            <div class="form-group" >
+                <select class="form-control"
+                        ng-model="spirit"
+                        ng-options="v.id for (k,v) in user.data.spirits">
+                    <option value="">-- 请选择 --</option><option value="">-- 请选择 --</option>
+                </select>
+            </div>
+
+            <ul>
+                <li> 元神ID:{{spirit.id}} </li>
+                <li> 等级:{{spirit.level}} </li>
+                <li> 品质:{{spirit.quality}} </li>
+                <li> 设置:
+                    等级:<input name="input_spiritLevel" id="input_spiritLevel" value="10" />
+                    品质:<select id="input_spiritQuality" name="input_spiritQuality">
+                        <option value="1" selected>白</option>
+                        <option value="2">绿</option>
+                        <option value="3">蓝</option>
+                        <option value="4">紫</option>
+                        <option value="5">金</option>
+                    </select>
+                    <button ng-click="setSpirit()" >执行</button>
+                    <br><br>
+                </li>
+
+            </ul>
+            <table class="table table-hover">
+                <thead> <tr> <th> 法宝 </th>
+                <tbody>
+                <tr ng-repeat="(k,v) in spirit.magics">
+                    <td> {{k}} </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+</div>
+
+<% include footer.html %>

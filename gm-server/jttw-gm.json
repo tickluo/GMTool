@@ -1,0 +1,9 @@
+{
+    "apps": [{
+        "name"            : "jttw-gm",
+        "script"          : "./app.js",
+        "log_date_format" : "YYYY-MM-DD HH:mm:ss Z",
+        "error_file"      : "./logs/jttw-gm-err.log",
+        "out_file"        : "./logs/jttw-gm.log"
+    }]
+}

@@ -1,0 +1,19 @@
+{
+  "desc": "Returns user s information",
+  "security": [],
+  "protected": false,
+  "status": "open",
+  "request": {
+    "uri": {
+      "parameters": [
+
+      ]
+    }
+  },
+  "response": {
+    "statusCode": 200,
+    "schema": {
+      "type": "application/json"
+    }
+  }
+}

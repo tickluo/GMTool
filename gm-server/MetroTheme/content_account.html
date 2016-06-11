@@ -1,0 +1,196 @@
+
+<div class="row-fluid">
+
+    <div class="box span12">
+        <div class="box-header">
+            <h2><i class="halflings-icon th"></i><span class="break"></span>Player</h2>
+        </div>
+        <div class="box-content">
+            <ul class="nav tab-menu nav-tabs" id="myTab">
+                <li class="active"><a href="#info">玩家信息</a></li>
+                <li><a href="#custom1"></a></li>
+                <li><a href="#messages1">法宝</a></li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane active" id="info">
+                    <p>
+
+                        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                    </p>
+
+                </div>
+                <div class="tab-pane" id="custom1">
+                    <p>
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                    </p>
+                </div>
+                <div class="tab-pane" id="messages1">
+                    <p>
+                        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                    </p>
+                    <p>
+                        Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div><!--/span-->
+
+</div><!--/row-->
+
+
+</div><!--/.fluid-container-->
+<div   ng-controller="AccountController">
+    <div class="row-fluid">
+        <div class="span12">
+            <div >
+                <legend ><a anme="find">查找</a></a></legend>
+                <div class="controls">
+                    <label class="radio">
+                        <input type="radio" name="input_searchType" id="optionsRadios1" value="uid" checked="">  UID   |
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="input_searchType" id="optionsRadios2" value="openId">  OpenID  |
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="input_searchType" id="optionsRadios3" value="username">  UserName  |
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="input_searchType" id="optionsRadios4" value="nickname">  NickName  |
+                    </label>
+                    <input name="input_searchVal" id="input_searchVal" value="" /><button ng-click="searchPlayer()" >查找</button><br><br>
+                </div>
+                <span class="help-block">{{message}}</span>
+            </div>
+
+            <legend><a anme="info">基本信息</a></legend>
+            <ul>
+                <li> 玩家名:{{user.userName}} </li>
+                <li> openId:{{user.openId}} </li>
+                <li> uid:{{user.uid}} </li>
+                <li> 登陆时间: {{user.date}}</li>
+                <li> 所在地图ID: {{user.data.areaId}}</li>
+                <li> 角色名称: {{user.data.nickName}}</li>
+                <li> 等级: {{user.data.level}}</li>
+                <li> 角色AvatarID:{{user.data.avatarId}} </li>
+                <li> 签到信息:{{user.data.signin}} ,签到时间:{{getLocalTime(user.data.signin)}}</li>
+                <li> GM操作:
+                    <br>
+                    <button ng-click="passLevel()" >通关关卡</button>:<input name="input_level" id="input_level" value="" /><br><br>
+                    <button ng-click="passAllLevel()" >通关所有关卡</button><br><br>
+                    <button ng-click="addAllSpirit()" >添加所有元神</button><br><br>
+                    <button ng-click="setHeroLevel()" >设置等级</button>:<input name="input_playerlevel" id="input_playerlevel" value="10" /><br><br>
+                    <button ng-click="setGuideStep()" >设置新手引导步骤</button>:<input name="input_guideStep" id="input_guideStep" value="0" /><br><br>
+                    <button ng-click="kick()" >踢下线</button><br><br>
+                </li>
+            </ul>
+            <table class="table table-hover">
+                <thead> <tr> <th> 装备栏位 </th> <th> 装备ID </th> <th> 强化 </th></tr> </thead>
+                <tbody>
+                <tr ng-repeat="(k,v) in hero.equipments">
+                    <td> {{k}} </td>
+                    <td>{{v.id}}  </td>
+                    <td>{{v.enhanced}}  </td>
+                </tr> </tbody>
+            </table>
+            <table class="table table-hover">
+                <thead> <tr> <th> 技能ID </th> <th> 技能名称 </th> </tr> </thead>
+                <tbody>
+                <tr ng-repeat="skill in hero.skills">
+                    <td>{{skill.id}}  </td>
+                    <td> {{skill.name}}</td>
+                </tr> </tbody>
+            </table>
+
+            <table class="table table-hover">
+                <thead> <tr> <th> 被动技能ID </th>   <th> 被动技能名称 </th> <th> 是否使用 </th></tr> </thead>
+                <tbody>
+                <tr ng-repeat="pskill in hero.pskills">
+                    <td>{{pskill.id}}  </td>
+                    <td>{{pskill.name}}  </td>
+                    <td>{{pskill.use}}  </td>
+
+                </tr> </tbody>
+            </table>
+
+            <legend ><a name="item">道具</a></legend>
+            <label>
+                道具ID <input type="text" ng-model="itemId"/>
+                数量 <input type="text"   ng-model="itemCount" />
+                <button type="submit" class="btn" ng-click="addItem()">添加</button> </label>
+            <button type="submit" class="btn" ng-click="addAllItem500()">添加所有道具500个</button> </label>
+            <table class="table table-hover">
+                <thead> <tr> <th> 道具ID </th>
+                    <th> 数量 </th></tr> </thead>
+                <tbody>
+                <tr ng-repeat="(k,v)  in user.data.items">
+                    <td> {{k}} </td>
+                    <td> {{v.count}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <legend ><a name="magic">法宝</a></legend>
+            <label>
+                法宝ID <input type="text" ng-model="magicId"/>
+                数量 <input type="text"   ng-model="magicCount" />
+                <button type="submit" class="btn" ng-click="addMagic()">添加</button> </label>
+            <button type="submit" class="btn" ng-click="addAllMagic500()">添加所有法宝500个</button> </label>
+            <table class="table table-hover">
+                <thead> <tr> <th> ID </th>
+                    <th> 数量 </th></tr> </thead>
+                <tbody>
+                <tr ng-repeat="(k,v)  in user.data.magics">
+                    <td> {{k}} </td>
+                    <td> {{v.count}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <legend><a name="transformer">元神</a></legend>
+            <form class="form-inline">
+                <label>元神ID <input type="text" ng-model="newTId"/>
+                    <button type="submit" class="btn"  ng-click="addSpirit()" >添加</button> </label> <span class="help-block">.</span>
+            </form>
+
+            <div class="form-group" >
+                <select class="form-control"
+                        ng-model="spirit"
+                        ng-options="v.id for (k,v) in user.data.spirits">
+                    <option value="">-- 请选择 --</option><option value="">-- 请选择 --</option>
+                </select>
+            </div>
+
+            <ul>
+                <li> 元神ID:{{spirit.id}} </li>
+                <li> 等级:{{spirit.level}} </li>
+                <li> 品质:{{spirit.quality}} </li>
+                <li> 设置:
+                    等级:<input name="input_spiritLevel" id="input_spiritLevel" value="10" />
+                    品质:<select id="input_spiritQuality" name="input_spiritQuality">
+                        <option value="1" selected>白</option>
+                        <option value="2">绿</option>
+                        <option value="3">蓝</option>
+                        <option value="4">紫</option>
+                        <option value="5">金</option>
+                    </select>
+                    <button ng-click="setSpirit()" >执行</button>
+                    <br><br>
+                </li>
+
+            </ul>
+            <table class="table table-hover">
+                <thead> <tr> <th> 法宝 </th>
+                    <tbody>
+                <tr ng-repeat="(k,v) in spirit.magics">
+                    <td> {{k}} </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+</div>

@@ -1,0 +1,10 @@
+{
+	"development": {
+        "accountdbUrl": "mongodb://foo:bar@127.0.0.1:27017/accountdb",
+        "jttwdbUrl": "mongodb://foo:bar@127.0.0.1:27017/jttwdb"
+    },
+	"production": {
+        "accountdbUrl": "mongodb://foo:bar@127.0.0.1:27017/accountdb",
+        "jttwdbUrl": "mongodb://foo:bar@127.0.0.1:27017/jttwdb"
+    }
+}

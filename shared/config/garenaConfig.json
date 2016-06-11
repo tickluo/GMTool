@@ -1,0 +1,16 @@
+{
+    "development": {
+        "appId": 100045,
+        "appKey": "1cd5df245fc11727abf5cdea9b97168e45eb660d177f5d28be88c0da8642f1a7",
+        "paymentKey": "bb589d0e9213260058db4aa7d1a55b9202f6cc8ea8fb1297e009c8c6f55ba811",
+        "restUrl": "https://testconnect.garena.com",
+        "whiteList": false
+    },
+    "production": {
+        "appId": 100045,
+        "appKey": "463cbed307e9f413f7707b72217a68a18d3b9fd46ef36362cb1bc44d8fa8cd33",
+        "paymentKey": "24cf71fa2eda0b202527ea67b62b969446ec542c6cd0a8e08effb8025a8966fc",
+        "restUrl": "https://connect.garena.com",
+        "whiteList": false
+    }
+}

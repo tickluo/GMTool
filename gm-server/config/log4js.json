@@ -1,0 +1,35 @@
+{
+    "appenders": [
+        {
+            "type": "console"
+        },
+        {
+            "type": "file",
+            "filename": "./logs/app.log",
+            "maxLogSize": 104857600,
+            "layout": {
+                "type": "pattern",
+                "pattern": "[%d{yyyy-MM-dd hh:mm:ss}] [%5p] - %m"
+            },
+            "backups": 3,
+            "category": "app"
+        },
+        {
+            "type": "file",
+            "filename": "./logs/apiService.log",
+            "maxLogSize": 104857600,
+            "layout": {
+                "type": "pattern",
+                "pattern": "[%d{yyyy-MM-dd hh:mm:ss}] [%5p] - %m"
+            },
+            "backups": 3,
+            "category": "apiService"
+        }
+    ],
+    "level": {
+        "app": "TRACE",
+        "apiService": "TRACE"
+    },
+    "replaceConsole": true,
+    "lineDebug": false
+}

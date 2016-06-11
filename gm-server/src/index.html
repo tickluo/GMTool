@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="app/app.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="app/all/login/login.css">
+    <link rel="stylesheet" href="app/all/init/init.css">
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <link rel="stylesheet" href="component/shared/accountContainer.css">
+    <link rel="stylesheet" href="component/layout/sidebar.css">
+    <link rel="stylesheet" href="component/layout/navbar.css">
+    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body ng-controller="globalCtrl">
+<div  class="slide" ui-view></div>
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="bower_components/angular-material/angular-material.min.js"></script>
+<!--<script src="bower_components/angular-messages/angular-messages.min.js"></script>-->
+<script src="module.js"></script>
+<script src="app.js"></script>
+<script src="app/global.js"></script>
+<script src="const/app.const.js"></script>
+<script src="const/state.const.js"></script>
+<script src="const/avatar.const.js"></script>
+<script src="service/auth.svc.js"></script>
+<script src="service/api.svc.js"></script>
+<script src="service/init.svc.js"></script>
+<script src="webService/auth.wsvc.js"></script>
+<script src="webService/init.wsvc.js"></script>
+<script src="webService/setting.wsvc.js"></script>
+<script src="directive/layout/showLabel.js"></script>
+<script src="component/shared/accountContainer.comp.js"></script>
+<script src="app/auth/view1/view1.js"></script>
+<script src="app/auth/view2/view2.js"></script>
+<script src="app/all/login/login.js"></script>
+<script src="app/all/init/init.js"></script>
+<script src="component/layout/sidebar.comp.js"></script>
+<script src="component/layout/sidebar.svc.js"></script>
+<script src="component/layout/navbar.comp.js"></script>
+<script src="component/shared/astSvrList.comp.js"></script>
+<script src="directive/version/version.js"></script>
+<script src="directive/version/version-directive.js"></script>
+<script src="directive/version/interpolate-filter.js"></script>
+</body>
+</html>

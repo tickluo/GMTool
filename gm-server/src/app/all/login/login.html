@@ -1,0 +1,39 @@
+<div ng-controller="loginCtrl as ctrl" ng-class="{start_loading:ctrl.startLogin}" class="wrapper" ng-cloak>
+    <div class="container">
+        <h1>Welcome to GMTool</h1>
+
+        <form class="login-form"  ng-submit="ctrl.submitLogin()"
+              ng-hide="ctrl.hideLoginForm"
+              ng-class="{fade:ctrl.startFade}">
+            <input type="text" ng-model="ctrl.user.userName" required placeholder="Username">
+            <input type="text" ng-model="ctrl.user.password" required placeholder="Password">
+            <button type="submit">Login</button>
+        </form>
+
+        <form class="login-form" ng-submit="ctrl.submitSignUp()" ng-hide="ctrl.hideSignForm"
+              ng-class="{fade:ctrl.startFade}">
+            <input type="text" ng-model="ctrl.signUp.name" required placeholder="Your Name">
+            <input type="text" ng-model="ctrl.signUp.userName" required placeholder="Username">
+            <input type="password" ng-model="ctrl.signUp.password" required placeholder="Password">
+            <button type="submit">Sign UP</button>
+        </form>
+        <form>
+            <a class="form-tip" ng-click="ctrl.toggleForm()">{{ctrl.formTip}}</a>
+        </form>
+
+    </div>
+
+
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>

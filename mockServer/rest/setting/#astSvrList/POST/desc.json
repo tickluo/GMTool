@@ -1,0 +1,33 @@
+{
+  "desc": "user login",
+  "security": [],
+  "protected": false,
+  "status": "open",
+  "request": {
+    "uri": {
+      "parameters": [
+        {
+          "name": "username",
+          "required": true,
+          "type": "",
+          "desc": ""
+        },
+        {
+          "name": "password",
+          "required": true,
+          "type": "",
+          "desc": ""
+        }
+      ]
+    },
+    "schema": {
+      "type": "application/xml, application/json "
+    }
+  },
+  "response": {
+    "statusCode": 200,
+    "schema": {
+      "type": "application/json"
+    }
+  }
+}

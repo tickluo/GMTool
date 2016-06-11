@@ -1,0 +1,9 @@
+{
+	"development": {
+        "gmdbUrl": "mongodb://foo:bar@127.0.0.1:27017/GMToolDB"
+    },
+
+	"production": {
+        "gmdbUrl": "mongodb://foo:bar@127.0.0.1:27017/GMToolDB"
+    }
+}
