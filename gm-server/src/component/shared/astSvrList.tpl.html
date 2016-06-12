@@ -1,21 +1,7 @@
-<div>
-    <div class="control-group">
-        <div class="box-header">
-            <h2><i class="halflings-icon th"></i><span class="break"></span>选择服务器</h2>
-        </div>
-        <div class="controls">
-            <div ng-repeat="(k,v) in lists">
-                <label class="checkbox inline">
-                    <input name='astIPs' type="checkbox" value="{{k}}" checked> {{v}}<br>
-                </label>
-            </div>
-        </div>
-    </div>
-</div>
 <md-list ng-cloak>
     <md-subheader class="md-no-sticky">请选择服务器</md-subheader>
-    <md-list-item ng-repeat="(k,value) in ctrl.serverList">
-        <p> {{ ::k }}: {{::value}} </p>
-        <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
+    <md-list-item class="server-list" ng-repeat="(k,value) in ctrl.serverList">
+        <md-checkbox class="" ng-model="topping.wanted"></md-checkbox>
+        <p> {{::value}} </p>
     </md-list-item>
 </md-list>

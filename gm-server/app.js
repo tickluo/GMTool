@@ -1,6 +1,6 @@
 var express    = require('express');
 var bodyParser = require('body-parser');
-var partials   = require('express-partials');
+/*var partials   = require('express-partials');*/
 var users      = require('./routes/users');
 var account   = require('./routes/account');
 var init      = require('./routes/init');
@@ -10,7 +10,7 @@ var ejs        = require('ejs');
 var app        = express();
 var globalVar = require('./lib/globalVariable');
 var auth = require('./lib/auth');
-var session = require('express-session');
+/*var session = require('express-session');*/
 var cors = require('cors');
 
 app.locals.dirName = __dirname;
@@ -33,7 +33,7 @@ app.set('case sensitive routing', true);
 
 //TODO:set cors options
 app.use(cors());
-app.use(partials());
+/*app.use(partials());*/
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));

@@ -63,10 +63,10 @@ app.appModule
                     template: '<ui-view/>'
                 })
                 .state('layout.all.login', {
-                    url: '/view1',
+                    url: '/gm',
                     controller: 'showCtrl',
                     /*controllerAs: 'ctrl',*/
-                    templateUrl: 'app/auth/view1/view1.html'
+                    templateUrl: 'app/auth/gm/gm.html'
                 });
 
             $stateProvider
@@ -85,15 +85,15 @@ app.appModule
                     templateUrl: 'app/auth/user/user.html'
                 })
                 .state('layout.auth.view1', {
-                    url: '/view1',
-                    templateUrl: 'app/auth/view1/view1.html'
+                    url: '/gm',
+                    templateUrl: 'app/auth/gm/gm.html'
                 })
                 .state('layout.auth.view2', {
                     url: '/view2',
                     templateUrl: 'app/auth/view2/view2.html'
                 });
 
-            $urlRouterProvider.otherwise('/auth/view1')
+            $urlRouterProvider.otherwise('/auth/gm')
         }
     ])
 

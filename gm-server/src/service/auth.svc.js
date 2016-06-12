@@ -74,6 +74,7 @@ app.serviceModule
                     return authWebService.checkLogin()
                         .then(function (res) {
                             userInfo = res.data;
+                            userInfo.avatar = avatarConst[res.data.role];
                         })
                         .catch(function (err) {
                             if (err.status === 401) throw stateConst.AUTH_REJECT;

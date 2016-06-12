@@ -1,11 +1,12 @@
 /**
  * Created by chuan.jin on 2016/6/2.
  */
-var mockServer = require('node-mock-server'),
-    /*cors = require('cors'),*/
+var mockServer = require('node-mock-server');
+
+/*    cors = require('cors'),
     express = require('express');
 
-/*var app = express();
+var app = express();
 
 app.use(cors);*/
 

@@ -15,7 +15,8 @@ app.appModule = angular.module('myApp', [
     'myApp.const',
     'ngMaterial',
     'ngCookies',
-/*    'ngMessages',*/
-    'ngAnimate'
+    /*    'ngMessages',*/
+    'ngAnimate',
+    'ui.grid'
 ]);
 

@@ -39,19 +39,19 @@ app.serviceModule.factory('apiService', [
 
             get: function (url, params) {
                 return $http.get(gmServerUrl + url, {
-                    params: params,
-                    headers: {
+                    params: params
+                    /*headers: {
                         token: $cookies.get('token')
-                    }
+                    }*/
                 })
                     ;
             },
 
             post: function (url, data) {
                 return $http.post(gmServerUrl + url, data, {
-                    headers: {
+                    /*headers: {
                         token: $cookies.get('token')
-                    }
+                    }*/
                 });
             },
             getMock: function (url, params) {

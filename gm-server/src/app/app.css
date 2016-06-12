@@ -29,7 +29,6 @@
     padding: 0;
 }
 
-
 .nav-layout {
     display: flex;
     justify-content: space-between;
@@ -49,15 +48,29 @@
 .slide.ng-leave {
     transition: all 1s ease;
 }
+
 .slide.ng-enter {
     transform: translate(100%, 0);
 }
+
 .slide.ng-enter-active {
     transform: translate(0, 0);
 }
+
 .slide.ng-leave {
     transform: translate(0, 0);
 }
+
 .slide.ng-leave-active {
     transform: translate(-100%, 0);
+}
+
+.clear-out {
+    margin: 0;
+    padding: 0;
+}
+
+md-input-container.combo-button {
+    position: relative;
+    top: 13px;
 }

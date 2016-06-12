@@ -1,2 +1,160 @@
+<div ng-controller="userCtrl as ctrl" layout="column" class="md-padding">
+    <ast-svr flex="33"></ast-svr>
 
-<ast-svr></ast-svr>
+    <!--    <div ng-repeat="message in messages  track by $index">
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{message}}
+            </div>
+        </div>-->
+
+    <div layout="row" layout-sm="column" layout-align="start center" layout-wrap>
+        <md-input-container class="combo-button">
+            <label>Select Value</label>
+            <input>
+        </md-input-container>
+        <md-input-container>
+            <label>Select Key</label>
+            <md-select ng-model="ctrl.userState">
+                <md-option ng-repeat="key in ctrl.selectOption" value="{{key}}">
+                    {{key}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-button class="md-raised">Search</md-button>
+    </div>
+
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="玩家信息">
+            <md-content layout="row" class="md-padding">
+                <md-card flex="25">
+                    <md-content layout-padding>
+                        <span> 玩家名:{{user.userName}}</span>
+                        <md-divider></md-divider>
+                        <span> openId:{{user.openId}}</span>
+                        <md-divider></md-divider>
+                        <span> uid:{{user.uid}}</span>
+                        <md-divider></md-divider>
+                        <span> 登陆时间: {{user.date}}</span>
+                        <md-divider></md-divider>
+                        <span> 所在地图ID: {{user.data.areaId}}</span>
+                        <md-divider></md-divider>
+                        <span> 角色名称: {{user.data.nickName}}</span>
+                        <md-divider></md-divider>
+                        <span> 等级: {{user.data.level}}</span>
+                        <md-divider></md-divider>
+                        <span> 角色AvatarID:{{user.data.avatarId}}</span>
+                        <md-divider></md-divider>
+                        <span> 签到信息:{{user.data.signin}}</span>
+                        <md-divider></md-divider>
+                        <span> 签到时间:{{getLocalTime(user.data.signin)}}</span>
+                        <md-divider></md-divider>
+                        <span> 体力:{{user.data.energy.count}}</span>
+                        <md-divider></md-divider>
+                        <span> 新手引导:{{user.data.guideStep}}</span>
+                    </md-content>
+                </md-card>
+                <md-card layout="column" class="md-padding" layout-align="center center" flex>
+                    <div layout="row" layout-align="start center">
+                        <md-input-container class="combo-button">
+                            <label>通关关卡</label>
+                            <input ng-model="user.title">
+                        </md-input-container>
+                        <md-button class="md-raised">设置</md-button>
+                    </div>
+                    <div layout="row" layout-align="start center">
+                        <md-input-container class="combo-button">
+                            <label>设置等级</label>
+                            <input ng-model="user.title">
+                        </md-input-container>
+                        <md-button class="md-raised">设置</md-button>
+                    </div>
+                    <div layout="row" layout-align="start center">
+                        <md-input-container class="combo-button">
+                            <label>设置新手引导步骤</label>
+                            <input ng-model="user.title">
+                        </md-input-container>
+                        <md-button class="md-raised">设置</md-button>
+                    </div>
+                    <div layout="row" layout-align="start center">
+                        <md-input-container class="combo-button">
+                            <label>设置体力</label>
+                            <input ng-model="user.title">
+                        </md-input-container>
+                        <md-button class="md-raised">设置</md-button>
+                    </div>
+                    <div>
+                        <md-button class="md-raised md-primary" style="color:white;">通关所有关卡</md-button>
+                        <md-button class="md-raised md-primary" style="color:white;">解锁所有系统</md-button>
+                        <md-button class="md-raised  md-warn">踢下线</md-button>
+                    </div>
+                </md-card>
+            </md-content>
+        </md-tab>
+        <md-tab label="元神">
+            <md-content class="md-padding">
+                <div layout="row" layout-align="start center">
+                    <md-input-container class="combo-button">
+                        <label>元神Id</label>
+                        <input ng-model="user.title">
+                    </md-input-container>
+                    <md-button class="md-raised">添加</md-button>
+                    <md-button class="md-raised md-warn">添加所有元神</md-button>
+                </div>
+                <div id="grid2" ui-grid="ctrl.spiritGrid" class="grid"></div>
+            </md-content>
+        </md-tab>
+        <md-tab label="法宝">
+            <md-content class="md-padding">
+                <div layout="row" layout-align="start center">
+                    <md-input-container class="combo-button">
+                        <label>法宝Id</label>
+                        <input ng-model="user.title">
+                    </md-input-container>
+                    <md-input-container class="combo-button">
+                        <label>法宝数量</label>
+                        <input ng-model="user.title">
+                    </md-input-container>
+                    <md-button class="md-raised">添加</md-button>
+                    <md-button class="md-raised md-warn">添加所有法宝500个</md-button>
+                </div>
+                <div id="grid3" ui-grid="ctrl.magicGrid" class="grid"></div>
+            </md-content>
+        </md-tab>
+        <md-tab label="道具">
+            <md-content class="md-padding">
+                <div layout="row" layout-align="start center">
+                    <md-input-container class="combo-button">
+                        <label>道具Id</label>
+                        <input ng-model="user.title">
+                    </md-input-container>
+                    <md-input-container class="combo-button">
+                        <label>道具数量</label>
+                        <input ng-model="user.title">
+                    </md-input-container>
+                    <md-button class="md-raised">添加</md-button>
+                    <md-button class="md-raised md-warn">添加所有道具500个</md-button>
+                </div>
+                <div id="grid4" ui-grid="ctrl.itemGrid" class="grid"></div>
+            </md-content>
+        </md-tab>
+        <md-tab label="技能">
+            <md-content class="md-padding">
+                <div layout="row" layout-align="start center">
+                    <md-input-container class="combo-button">
+                        <label>技能Id</label>
+                        <input ng-model="user.title">
+                    </md-input-container>
+                    <md-button class="md-raised">学习技能</md-button>
+                </div>
+                <div id="grid5" ui-grid="ctrl.skillGrid" class="grid"></div>
+            </md-content>
+        </md-tab>
+        <md-tab label="装备">
+            <md-content class="md-padding">
+                <div id="grid6" ui-grid="ctrl.equipGrid" class="grid"></div>
+            </md-content>
+        </md-tab>
+
+    </md-tabs>
+</div>
