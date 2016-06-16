@@ -9,10 +9,10 @@ app.webServiceModule
         function (apiService) {
             return {
                 getInitSetting: function (model) {
-                    return apiService.getMock('/api/init/setting', model);
+                    return apiService.get('/api/init/setting', model);
                 },
                 postAdminSetting: function (model) {
-                    return apiService.postMock('/api/init/setup', model);
+                    return apiService.post('/api/init/setup', model);
                 }
             }
         }]);

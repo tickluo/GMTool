@@ -5,7 +5,11 @@
 app.appModule
     .controller('userCtrl', [
         'uiGridConstants',
-        function (uiGridConstants) {
+        'authService',
+        function (uiGridConstants, authService) {
+            //TODO:click search then set disable
+            this.hasAuth = authService.getAuthorities().indexOf('gm') < 0;
+
             this.selectOption = [
                 'UId',
                 'NumberId',
@@ -23,41 +27,55 @@ app.appModule
                     {displayName: '品质', field: 'quality', enableSorting: false},
                     {displayName: '品质等级', field: 'qualityLevel', enableSorting: false}
                 ],
-                data: [{name: '元神1', id: 1, level: 3, rank: 1, quality: '黄', qualityLevel: 2}, {name: '元神2', id: 2, level: 4, rank: 1, quality: '黄', qualityLevel: 1}]
+                data: [{name: '元神1', id: 1, level: 3, rank: 1, quality: '黄', qualityLevel: 2}, {
+                    name: '元神2',
+                    id: 2,
+                    level: 4,
+                    rank: 1,
+                    quality: '黄',
+                    qualityLevel: 1
+                }]
             };
 
-            this.magicGrid={
+            this.magicGrid = {
                 columnDefs: [
                     {displayName: '法宝Id', field: 'id', enableSorting: false},
                     {displayName: '数量', field: 'count', enableSorting: false}
                 ],
-                data: [{id: 1, count: 3},{id: 2, count: 2},{id: 3, count: 4}]
+                data: [{id: 1, count: 3}, {id: 2, count: 2}, {id: 3, count: 4}]
             };
 
-            this.itemGrid={
+            this.itemGrid = {
                 columnDefs: [
                     {displayName: '道具Id', field: 'id', enableSorting: false},
                     {displayName: '数量', field: 'count', enableSorting: false}
                 ],
-                data: [{id: 1, count: 3},{id: 2, count: 2},{id: 3, count: 4}]
+                data: [{id: 1, count: 3}, {id: 2, count: 2}, {id: 3, count: 4}]
             };
 
-            this.skillGrid={
+            this.skillGrid = {
                 columnDefs: [
                     {displayName: '技能Name', field: 'name'},
                     {displayName: '技能Id', field: 'id', enableSorting: false},
                     {displayName: '技能开启', field: 'get'}
                 ],
-                data: [{name:'技能1',id: 1, get: true},{name:'技能2',id: 2, get: true},{name:'技能3',id: 3, get: true}]
+                data: [{name: '技能1', id: 1, get: true}, {name: '技能2', id: 2, get: true}, {
+                    name: '技能3',
+                    id: 3,
+                    get: true
+                }]
             };
 
-            this.equipGrid={
+            this.equipGrid = {
                 columnDefs: [
                     {displayName: '装备栏位', field: 'position'},
                     {displayName: '装备Id', field: 'id', enableSorting: false},
                     {displayName: '强化', field: 'ultra'}
                 ],
-                data: [{position:'头',id: 1, ultra: 1},{position:'武器',id: 2, ultra: 2},{position:'衣服',id: 3, ultra: 3}]
+                data: [{position: '头', id: 1, ultra: 1}, {position: '武器', id: 2, ultra: 2}, {
+                    position: '衣服',
+                    id: 3,
+                    ultra: 3
+                }]
             };
-            //TODO:click search then set disable
         }]);

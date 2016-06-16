@@ -7,7 +7,7 @@ var account = require('../lib/models/account');
 var setting = require('../lib/models/setting');
 var globalVar = require('../lib/globalVariable');
 
-router.get('/setting',function(req, res){
+router.get('/setting', function (req, res) {
     return res.send(globalVar.isAccountServerSet());
 });
 
@@ -27,6 +27,10 @@ router.post('/setup', function (req, res) {
              email: data.email,
              emailPwd: data.emailPwd,
              SMTP: SMTP
+             email: data.email,
+             emailPwd: data.emailPwd,
+             SMTPHost: data.SMTPHost,
+             SMTPPort: data.SMTPPort,
              }*/
             account.register({
                 userName: data.admin,
@@ -38,7 +42,14 @@ router.post('/setup', function (req, res) {
         },
         function (cb) {
             console.log('setup 3');
-            setting.save('accSvrURL', url, cb);
+            setting.save('accSvrURL', {
+                admin:data.admin,
+                email: data.email,
+                emailPwd: data.emailPwd,
+                SMTPHost: data.SMTPHost,
+                SMTPPort: data.SMTPPort,
+                url:url
+            }, cb);
         }
     ], function (err) {
 

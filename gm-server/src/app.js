@@ -33,16 +33,28 @@ app.appModule
                     //TODO: set static layout to the route
                     /*controller: 'layoutCtrl',
                      controllerAs: 'ctrl',*/
-                    controller: ['$scope', function ($scope) {
-                        $scope.$on("$stateChangeSuccess", function (event, toState, toParams, fromState, fromParams) {
-                            $scope.transitionState = "active";
-                        });
-                    }],
+                    controller: [
+                        '$scope',
+                        'authorities',
+                        '$state',
+                        function ($scope, authorities, $state) {
+                            $scope.$on("$stateChangeSuccess", function (event, toState, toParams, fromState, fromParams) {
+                                /*filter unAuth url*/
+                                var states = authorities.map(function (item) {
+                                    return 'layout.auth.' + item
+                                });
+                                if (states.indexOf(toState.name) < 0) {
+                                    toState.name !== 'layout.auth.user' && $state.go('layout.auth.user');
+                                }
+                                $scope.transitionState = "active";
+                            });
+                        }],
                     templateUrl: 'app/layout.html',
                     resolve: {
-                        'auth': function (authService, $log) {
+                        authorities: ['authService', 'stateConst', function (authService, stateConst) {
                             return authService.getAuthorities();
-                        }
+                            /*return $q.reject(stateConst.AUTH_REJECT);*/
+                        }]
                     }
                 });
 
@@ -57,43 +69,28 @@ app.appModule
                 });
 
             $stateProvider
-                .state('layout.all', {
-                    url: '/all',
-                    /*controller: 'globalCtrl',*/
-                    template: '<ui-view/>'
-                })
-                .state('layout.all.login', {
-                    url: '/gm',
-                    controller: 'showCtrl',
-                    /*controllerAs: 'ctrl',*/
-                    templateUrl: 'app/auth/gm/gm.html'
-                });
-
-            $stateProvider
                 .state('layout.auth', {
                     url: '/auth',
-                    templateUrl: 'app/auth/layout.html',
-                    resolve: {
-                        authorities: ['authService', 'stateConst', function (authService, stateConst) {
-                            return authService.checkLogin();
-                            /*return $q.reject(stateConst.AUTH_REJECT);*/
-                        }]
-                    }
+                    templateUrl: 'app/auth/layout.html'
                 })
                 .state('layout.auth.user', {
                     url: '/user',
                     templateUrl: 'app/auth/user/user.html'
                 })
-                .state('layout.auth.view1', {
+                .state('layout.auth.gm', {
                     url: '/gm',
                     templateUrl: 'app/auth/gm/gm.html'
                 })
-                .state('layout.auth.view2', {
-                    url: '/view2',
+                .state('layout.auth.account', {
+                    url: '/account',
+                    templateUrl: 'app/auth/account/account.html'
+                })
+                .state('layout.auth.setting', {
+                    url: '/setting',
                     templateUrl: 'app/auth/view2/view2.html'
                 });
 
-            $urlRouterProvider.otherwise('/auth/gm')
+            $urlRouterProvider.otherwise('/auth/user')
         }
     ])
 
@@ -104,7 +101,8 @@ app.appModule
         '$state',
         '$log',
         'initService',
-        function ($rootScope, stateConst, appConst, $state, $log, initService) {
+        'authService',
+        function ($rootScope, stateConst, appConst, $state, $log, initService, authService) {
             $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
                 $log.debug(error);
                 switch (error) {
@@ -126,11 +124,27 @@ app.appModule
                 }
             });
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, error) {
-                initService.getInitSetting().then(function (res) {
-                    if (toState.name !== 'init') {
-                        event.preventDefault();
-                        $state.go('init');
-                    }
+                var isAuthenticated = authService.isAuthenticated();
+                if ((isAuthenticated && !$state.is(toState.name)) || toState.name === 'login') {
+                    return;
+                }
+
+                event.preventDefault();
+                authService
+                    .checkLogin()
+                    .then(function (user) {
+
+                        var isAuthenticated = user.isAuthenticated === true;
+
+                        if (isAuthenticated) {
+                            // let's continue, use is allowed
+                            $state.go(toState, toParams);
+                            return;
+                        }
+                        // log on / sign in...
+                        $state.go("login");
+                    }).catch(function () {
+                    $state.go("login");
                 })
             })
         }]);

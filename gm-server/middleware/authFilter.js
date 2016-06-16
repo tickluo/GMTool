@@ -5,13 +5,17 @@ var sessionContainer = require('./container')();
 
 /*{token:'',user:{...},time:+new Date()}*/
 module.exports = function (req, res, next) {
-    var token =  req.get('token');
+    var token = req.get('token');
     var session = sessionContainer[token];
-    if (token && session){
+    if (token && session) {
         var dateSpan = new Date() - session.time;
-        if(dateSpan <= 7200000 && dateSpan >= 0){
+        if (dateSpan <= 7200000 && dateSpan >= 0) {
             return next();
         }
+        else {
+            sessionContainer[token] && delete sessionContainer[token];
+            return res.status(401).send({type:'expire'});
+        }
     }
-    res.status(401).send({});
+    res.status(401).send({type:'nonAuth'});
 };

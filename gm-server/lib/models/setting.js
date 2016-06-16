@@ -18,6 +18,26 @@ var settingSchema = new Schema({
     v: {
         type: String,
         required: true
+    },
+    email:{
+        type: String,
+        required: true
+    },
+    emailPwd:{
+        type: String,
+        required: true
+    },
+    SMTPHost:{
+        type: String,
+        required: true
+    },
+    SMTPPort:{
+        type: String,
+        required: true
+    },
+    admin:{
+        type: String,
+        required: true
     }
 }, {
     strict: true,
@@ -44,7 +64,15 @@ Setting.save = function (key, value, cb) {
     SettingModel.findOneAndUpdate({
             k: key
         }, {
-            $set:{k:key,v:value}
+            $set: {
+                k: key,
+                admin: value.admin,
+                email: value.email,
+                emailPwd: value.emailPwd,
+                SMTPHost: value.SMTPHost,
+                SMTPPort: value.SMTPPort,
+                v: value.url
+            }
         }, {
             upsert: true
         },
@@ -63,7 +91,7 @@ Setting.get = function (key, cb) {
     );
 };
 
-Setting.getAll = function ( cb) {
+Setting.getAll = function (cb) {
     SettingModel.find({},
         function (err, doc) {
             cb(err, doc);

@@ -1,0 +1,17 @@
+<md-dialog aria-label="Mango (Fruit)" ng-cloak>
+    <form>
+        <md-toolbar class="md-hue-2">
+            <div layout-align="center center" class="md-toolbar-tools">
+                <h2>{{user.name}}管理</h2>
+            </div>
+        </md-toolbar>
+        <!--<md-dialog-content>
+
+        </md-dialog-content>-->
+        <md-dialog-actions layout="row" layout-align="center center">
+            <md-button ng-hide="hasAuth"  class="md-primary md-hue-2"  ng-click="authAccount()">授权</md-button>
+            <md-button ng-hide="!hasAuth" ng-class="{'md-warn':!blocked}" class="md-raised md-hue-2" ng-click="blockAccount()">{{msg}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

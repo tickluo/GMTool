@@ -1,0 +1,29 @@
+<div id="accountManager" ng-controller="accountCtrl as ctrl" layout="column" class="md-padding">
+
+    <!--    <ast-svr flex="33"></ast-svr>
+            <div ng-repeat="message in messages  track by $index">
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{message}}
+                </div>
+            </div>-->
+
+    <div layout="row" layout-sm="column" layout-align="start center" layout-wrap>
+        <md-input-container class="combo-button">
+            <label>请输入查询</label>
+            <input ng-model="ctrl.query">
+        </md-input-container>
+        <md-input-container>
+            <label>查询条件</label>
+            <md-select ng-model="ctrl.selectQuery">
+                <md-option ng-repeat="select in ctrl.selectQuerysMsg" value="{{select}}">
+                    {{select}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-button ng-click="ctrl.fetchSearch()" class="md-raised">Search</md-button>
+    </div>
+
+    <div ui-grid="ctrl.accountGrid"  ui-grid-pagination  class="grid"></div>
+
+</div>

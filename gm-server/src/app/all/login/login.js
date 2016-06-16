@@ -8,6 +8,10 @@ app.appModule
         '$state',
         'authService',
         function ($timeout, $state, authService) {
+            if(authService.isAuthenticated()){
+                $state.go('layout.auth.user');
+            }
+
             this.hideSignForm = true;
             this.hideLoginForm = false;
             this.hideTipForm = false;
@@ -29,7 +33,7 @@ function startLogin($timeout, $state, authService) {
                     context.hideLoginForm = true;
                     context.hideTipForm = true;
                     $timeout(function () {
-                        $state.go('layout.auth.gm');
+                        $state.go('layout.auth.user');
                     }, 2000);
                 }
                 else {
@@ -49,7 +53,7 @@ function signUp(authService, $state, $timeout) {
                 context.startFade = true;
                 context.hideSignForm = true;
                 $timeout(function () {
-                    $state.go('layout.auth.gm');
+                    $state.go('layout.auth.user');
                 }, 2000);
             },
             function (err) {

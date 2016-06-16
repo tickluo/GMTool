@@ -7,9 +7,7 @@ app.componentModule.component('sidebar', {
 function sidebar(sidebarService,authService) {
     var context = this;
     context.user = authService.getUserInfo();
-    sidebarService.then(function(res){
-        context.menuItems = res;
-    })
+    context.menuItems = sidebarService.getAuthMenu();
 }
 
 

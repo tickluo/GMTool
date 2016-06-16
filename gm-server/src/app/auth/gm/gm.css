@@ -1,0 +1,50 @@
+.dynamic-list {
+    margin: 20px auto;
+    padding: 0;
+    width: 500px;
+}
+.dynamic-list .add, .dynamic-list ol li {
+    color: #FFF;
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    padding: 1em;
+    background-color: grey;
+    cursor: pointer;
+    user-select: none;
+}
+.dynamic-list .add {
+    margin: 0;
+    text-align: center;
+}
+.dynamic-list ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.dynamic-list ol li {
+    transition: all 1s ease-out;
+    -webkit-transform: scale(1);
+    max-height: 500px;
+    height: auto;
+}
+.dynamic-list ol li:nth-child(1) {
+    background-color: #26A8DE;
+}
+.dynamic-list ol li:nth-child(2) {
+    background-color: #27E99E;
+}
+.dynamic-list ol li:nth-child(3) {
+    background-color: #FEF035;
+}
+.dynamic-list ol li:nth-child(4) {
+    background-color: #FC3751;
+}
+.dynamic-list ol li:nth-child(5) {
+    background-color: #EA212D;
+}
+.dynamic-list ol li.new {
+    -webkit-transform: scale(0);
+    height: 0;
+    padding: 100px;
+}

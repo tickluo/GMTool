@@ -4,11 +4,20 @@
 
 app.serviceModule.factory('sidebarService', [
     '$http',
+    'authService',
     '$q',
-    function ($http, $q) {
-        var menus = [
-            {name:'GM',icon:''}
-            ];
+    function ($http, authService, $q) {
 
-        return $q.when(menus)
+        return {
+            getAuthMenu: function () {
+                var originalMenu = [
+                    /*{name: 'GM', icon: '', sref: 'root.layout.auth.gm'}*/
+                ];
+                var authorities = authService.getAuthorities();
+                authorities.forEach(function (item) {
+                    originalMenu.push({name: item, sref: 'layout.auth.' + item});
+                });
+                return originalMenu
+            }
+        }
     }]);

@@ -5,20 +5,20 @@
         </md-toolbar>
         <md-button layout="row" layout-align="center center" class="md-toolbar-tools nav-item"
                    ui-sref="layout.auth.user">
-            <h1>User Manage</h1>
+            <h1>玩家管理</h1>
         </md-button>
         <md-divider ng-if="!$last"></md-divider>
-        <md-button layout="row" layout-align="center center" class="md-toolbar-tools nav-item"
+        <!--<md-button layout="row" layout-align="center center" class="md-toolbar-tools nav-item"
                    ui-sref="layout.auth.view2">
             <h1>Setting</h1>
         </md-button>
         <md-divider ng-if="!$last"></md-divider>
-       <!-- <md-button layout="row" layout-align="center center" class="md-toolbar-tools nav-item"
+        <md-button layout="row" layout-align="center center" class="md-toolbar-tools nav-item"
                    ui-sref="layout.auth.view2">
             <h1>VIEW2</h1>
         </md-button>-->
     <md-button ng-repeat-start="item in ctrl.menuItems" layout="row" layout-align="center center"
-               class="md-toolbar-tools nav-item" ui-sref="{{item.name}}">
+               class="md-toolbar-tools nav-item" ui-sref="{{item.sref}}">
             <div hide-sm hide-md class="md-tile-content">
                 <i class="material-icons md-36">{{item.icon}}</i>
             </div>

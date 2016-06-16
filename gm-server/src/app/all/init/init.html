@@ -22,17 +22,19 @@
             <div class="init-form" ng-show="ctrl.curStep==1">
                 <h2 class="fs-title">Admin Setting</h2>
                 <!-- add attr required-->
-                <input type="text" name="admin" ng-model="ctrl.admin.account"  placeholder="Admin"/>
-                <input type="text" name="email" ng-model="ctrl.admin.email"  placeholder="Email"/>
-                <input type="password" name="pass" ng-model="ctrl.admin.password"  placeholder="Password"/>
+                <input type="text" name="admin" ng-model="ctrl.admin.account" placeholder="Admin"/>
+                <input type="text" name="email" ng-model="ctrl.admin.email" placeholder="Email"/>
+                <input type="password" name="pass" ng-model="ctrl.admin.password" placeholder="Password"/>
                 <input type="password" name="cpass" ng-model="ctrl.admin.rePassword"
                        placeholder="Confirm Password"/>
                 <input type="submit" ng-click="ctrl.adminSet()" class="next action-button" value="Next"/>
             </div>
             <div class="init-form" ng-show="ctrl.curStep==2">
                 <h2 class="fs-title">Email Setting</h2>
-                <input type="text" name="SMTP" ng-model="ctrl.admin.SMTP" placeholder="SMTP"/>
-                <input type="password" name="emailPwd" ng-model="ctrl.admin.emailPwd" placeholder="your Email password"/>
+                <input type="text" name="SMTPHost" ng-model="ctrl.admin.SMTPHost" placeholder="SMTP_HOST"/>
+                <input type="text" name="SMTPPort" ng-model="ctrl.admin.SMTPPort" placeholder="SMTP_PORT"/>
+                <input type="password" name="emailPwd" ng-model="ctrl.admin.emailPwd"
+                       placeholder="your Email password"/>
                 <input type="submit" ng-click="ctrl.emailSet()" class="next action-button" value="Next"/>
             </div>
             <div class="init-form" ng-show="ctrl.curStep==3">

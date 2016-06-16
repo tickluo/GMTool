@@ -74,3 +74,16 @@ md-input-container.combo-button {
     position: relative;
     top: 13px;
 }
+
+.gridCol-red {
+    color: red;
+    background-color: yellow !important;
+}
+
+.gridCol-blue {
+    color: blue;
+}
+
+.gridCol-green {
+    color: green;
+}

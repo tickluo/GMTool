@@ -1,32 +1,24 @@
 <div ng-controller="userCtrl as ctrl" layout="column" class="md-padding">
-    <ast-svr flex="33"></ast-svr>
 
-    <!--    <div ng-repeat="message in messages  track by $index">
-            <div class="alert alert-error">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                {{message}}
-            </div>
-        </div>-->
+    <!--    <ast-svr flex="33"></ast-svr>
+            <div ng-repeat="message in messages  track by $index">
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{message}}
+                </div>
+            </div>-->
 
     <div layout="row" layout-sm="column" layout-align="start center" layout-wrap>
         <md-input-container class="combo-button">
-            <label>Select Value</label>
+            <label>请输入NumberId</label>
             <input>
-        </md-input-container>
-        <md-input-container>
-            <label>Select Key</label>
-            <md-select ng-model="ctrl.userState">
-                <md-option ng-repeat="key in ctrl.selectOption" value="{{key}}">
-                    {{key}}
-                </md-option>
-            </md-select>
         </md-input-container>
         <md-button class="md-raised">Search</md-button>
     </div>
 
     <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="玩家信息">
-            <md-content layout="row" class="md-padding">
+            <md-content layout="row" layout-align="center center" class="md-padding">
                 <md-card flex="25">
                     <md-content layout-padding>
                         <span> 玩家名:{{user.userName}}</span>
@@ -54,7 +46,7 @@
                         <span> 新手引导:{{user.data.guideStep}}</span>
                     </md-content>
                 </md-card>
-                <md-card layout="column" class="md-padding" layout-align="center center" flex>
+                <md-card layout="column" class="md-padding" layout-align="center center" flex  ng-hide="ctrl.hasAuth">
                     <div layout="row" layout-align="start center">
                         <md-input-container class="combo-button">
                             <label>通关关卡</label>
@@ -93,7 +85,7 @@
         </md-tab>
         <md-tab label="元神">
             <md-content class="md-padding">
-                <div layout="row" layout-align="start center">
+                <div layout="row" layout-align="start center"   ng-hide="ctrl.hasAuth">
                     <md-input-container class="combo-button">
                         <label>元神Id</label>
                         <input ng-model="user.title">
@@ -106,7 +98,7 @@
         </md-tab>
         <md-tab label="法宝">
             <md-content class="md-padding">
-                <div layout="row" layout-align="start center">
+                <div layout="row" layout-align="start center"   ng-hide="ctrl.hasAuth">
                     <md-input-container class="combo-button">
                         <label>法宝Id</label>
                         <input ng-model="user.title">
@@ -123,7 +115,7 @@
         </md-tab>
         <md-tab label="道具">
             <md-content class="md-padding">
-                <div layout="row" layout-align="start center">
+                <div layout="row" layout-align="start center"  ng-hide="ctrl.hasAuth">
                     <md-input-container class="combo-button">
                         <label>道具Id</label>
                         <input ng-model="user.title">
@@ -140,7 +132,7 @@
         </md-tab>
         <md-tab label="技能">
             <md-content class="md-padding">
-                <div layout="row" layout-align="start center">
+                <div layout="row" layout-align="start center"  ng-hide="ctrl.hasAuth">
                     <md-input-container class="combo-button">
                         <label>技能Id</label>
                         <input ng-model="user.title">

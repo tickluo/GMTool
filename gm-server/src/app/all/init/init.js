@@ -5,6 +5,16 @@ app.appModule.controller('initCtrl', [
     'initService',
     '$state',
     function (initService, $state) {
+        initService.getInitSetting()
+            .then(function (res) {
+                if (res) {
+                    $state.go('login');
+                }
+            })
+            .catch(function () {
+                    $state.go('login');
+            });
+
         this.curStep = 1;
         this.adminSet = angular.bind(this, adminSet, initService);
         this.emailSet = angular.bind(this, emailSet, initService);
@@ -26,7 +36,8 @@ function emailSet(initService) {
     var context = this;
     context.curStep = 3;
     var emailInfo = {
-        SMTP: context.admin.SMTP,
+        SMTPHost: context.admin.SMTPHost,
+        SMTPPort: context.admin.SMTPPort,
         emailPwd: context.admin.emailPwd
     };
     initService.saveEmail(emailInfo);

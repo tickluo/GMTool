@@ -8,7 +8,7 @@ app.webServiceModule
         function (apiService) {
             return {
                 fetchAstSvrList: function (model) {
-                    return apiService.get('/authApi/setting/astSvrList', model);
+                    return apiService.getMock('/authApi/setting/astSvrList', model);
                 }
             }
         }]);

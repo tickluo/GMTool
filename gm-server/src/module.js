@@ -17,6 +17,7 @@ app.appModule = angular.module('myApp', [
     'ngCookies',
     /*    'ngMessages',*/
     'ngAnimate',
-    'ui.grid'
+    'ui.grid',
+    'ui.grid.pagination'
 ]);
 

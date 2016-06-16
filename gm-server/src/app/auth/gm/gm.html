@@ -1,4 +1,85 @@
-<div ng-controller="View1Ctrl as ctrl">
-    <p>This is the partial for view 1.</p><br/>
-    <h4>{{ctrl.name}}</h4>
+<div ng-controller="gmCtrl as ctrl" layout="column" class="md-padding">
+
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="设置">
+            <md-content layout="row" class="md-padding">
+                <md-card layout="column" class="md-padding" layout-align="center start" flex="33">
+                    <div layout="row" layout-align="start center">
+                        <md-input-container class="combo-button">
+                            <label>NumberId</label>
+                            <input ng-model="user.title">
+                        </md-input-container>
+                        <div layout="row" layout-align="center center">
+                            <md-button class="md-raised">踢出账号</md-button>
+                            <md-button class="md-raised">禁言</md-button>
+                            <md-button class="md-raised">封禁</md-button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <md-input-container class="combo-button">
+                            <label>消息设置</label>
+                            <input ng-model="user.title">
+                        </md-input-container>
+                        <md-button class="md-raised md-primary" style="color:white;">推送</md-button>
+                    </div>
+                    <div>
+                        <md-input-container class="combo-button">
+                            <label>广播设置</label>
+                            <input ng-model="user.title">
+                        </md-input-container>
+                        <md-button class="md-raised md-primary" style="color:white;">发送</md-button>
+                    </div>
+                    <div>
+                        <md-input-container class="combo-button">
+                            <label>最高等级</label>
+                            <input ng-model="user.title">
+                        </md-input-container>
+                        <md-button class="md-raised md-primary" style="color:white;">设置</md-button>
+                    </div>
+                    <div>
+                        <md-input-container class="combo-button">
+                            <label>激活码</label>
+                            <input ng-model="user.title">
+                        </md-input-container>
+                        <md-button class="md-raised md-primary" style="color:white;">设置</md-button>
+                    </div>
+                </md-card>
+                <md-card layout="column" class="md-inline-form" style=" background-color:#F8F8F8;"
+                         layout-align="start start" flex>
+                    <md-toolbar md-scroll-shrink>
+                        <div class="md-toolbar-tools">
+                            <h3>
+                                <span>公告</span>
+                            </h3>
+                        </div>
+                    </md-toolbar>
+                    <md-content layout-padding style="width: 80%; background-color:#F8F8F8;">
+                        <md-input-container class="combo-button">
+                            <label>标题</label>
+                            <input ng-model="user.title">
+                        </md-input-container>
+                        <md-input-container class="md-block" style="min-width: 100%;">
+                            <label>内容</label>
+                            <textarea ng-model="ctrl.announcement.content" md-maxlength="1000" rows="10"
+                                      md-select-on-focus></textarea>
+                        </md-input-container>
+                        <md-button class="md-raised">发布</md-button>
+                    </md-content>
+                </md-card>
+            </md-content>
+        </md-tab>
+        <md-tab label="邮件">
+            <md-content class="md-padding">
+                <div class="dynamic-list">
+                    <ol>
+                        <li ng-repeat="item in ctrl.attenchments track by $index">
+                            {{item}}
+                        </li>
+                    </ol>
+                </div>
+                <md-button ng-click="ctrl.addAttachment()" class="md-raised">添加</md-button>
+            </md-content>
+        </md-tab>
+    </md-tabs>
 </div>

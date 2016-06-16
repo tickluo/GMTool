@@ -1,18 +1,22 @@
-var express = require('express');
-var auth = require('../lib/auth');
-var accountModel = require('../lib/models/account');
-var uuid = require('node-uuid');
-var sessionContaner = require('../middleware/container')();
-var router = express.Router();
+var express = require('express'),
+    auth = require('../lib/auth'),
+    accountModel = require('../lib/models/account'),
+    settingModel = require('../lib/models/setting'),
+    mail = require('../lib/mail'),
+    uuid = require('node-uuid'),
+    sessionContaner = require('../middleware/container')(),
+    moment = require('moment'),
+    router = express.Router();
 
-router.get('/login', function (req, res) {
-    console.log('router:users:login:get');
-    return res.sendFile(req.app.locals.dirName + '/MetroTheme/page_login.html');
-});
+/*router.get('/login', function (req, res) {
+ console.log('router:users:login:get');
+ return res.sendFile(req.app.locals.dirName + '/MetroTheme/page_login.html');
+ });*/
 
 router.post('/signup', function (req, res) {
     var user = req.body;
     user.role = 'Observer';
+    user.isblocked = false;
     accountModel.register(user, function (err, userInfo) {
         if (err) {
             res.status(401).send("sign up failed, try again.");
@@ -21,8 +25,27 @@ router.post('/signup', function (req, res) {
             /*req.session.username = user.userName;
              res.send(savedUser);*/
             var token = uuid.v4();
-            sessionContaner[token] = userInfo;
-            res.send({code: 200, data: token});
+            var adminEmail = {};
+            settingModel.get('accSvrURL', function (err, admin) {
+                //todo:deal err
+                adminEmail = admin;
+                userInfo.isAuthenticated = true;
+                sessionContaner[token] = userInfo;
+                sessionContaner[token].time = new Date();
+                mail.sendOne({
+                    fromEmail: adminEmail.email,
+                    subject: user.name + ' 向您发了一封申请邮件',
+                    toEmail: adminEmail.email,
+                    admin: adminEmail.admin,
+                    user: user.name,
+                    sendDate: moment().format('YYYY-MM-DD HH:mm'),
+                    redirectUrl: 'http://localhost:8000/#!/login'
+                }, function (err, message, html, text) {
+                    console.log(err);
+                    if (err)  return res.sendStatus(403);
+                    res.send({code: 200, data: {token: token, role: user.role, isblocked: user.isblocked}});
+                });
+            });
         }
     })
 });
@@ -35,9 +58,11 @@ router.post('/login', function (req, res) {
         }
         else {
             var token = uuid.v4();
+            userInfo.isAuthenticated = true;
             sessionContaner[token] = userInfo;
+            sessionContaner[token].time = new Date();
             /*req.session[token] = user;*/
-            res.send({code: 200, data: token});
+            res.send({code: 200, data: {token: token, role: userInfo.role, isblocked: userInfo.isblocked}});
         }
     });
 });
@@ -52,7 +77,6 @@ router.get('/checkLogin', function (req, res) {
 });
 
 router.get('/logout', function (req, res) {
-    console.log('logout');
     /*req.session.destroy(function (err) {
      if (err) {
      res.send("error");

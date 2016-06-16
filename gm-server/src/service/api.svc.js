@@ -11,7 +11,7 @@ app.serviceModule.factory('apiService', [
     function ($http, $q, $cookies, appConst, $httpParamSerializer) {
         //TODO:will corsReq need to new?
         var gmServerUrl = 'http://' + appConst.gmServerUrl;
-        var mockServerUrl = 'http://localhost:8089';
+        var mockServerUrl = 'http://localhost:3003';
 
         return {
 
@@ -39,19 +39,18 @@ app.serviceModule.factory('apiService', [
 
             get: function (url, params) {
                 return $http.get(gmServerUrl + url, {
-                    params: params
-                    /*headers: {
+                    params: params,
+                    headers: {
                         token: $cookies.get('token')
-                    }*/
+                    }
                 })
-                    ;
             },
 
             post: function (url, data) {
                 return $http.post(gmServerUrl + url, data, {
-                    /*headers: {
+                    headers: {
                         token: $cookies.get('token')
-                    }*/
+                    }
                 });
             },
             getMock: function (url, params) {

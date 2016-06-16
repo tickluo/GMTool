@@ -1,0 +1,14 @@
+<div style="background-color:#F8F8F8;display: flex;align-items: center;justify-content: center;font-family:Open Sans,Helvetica,Arial,sans-serif;">
+    <div style="width:60%;height: 80%;background-color:#ffffff;padding:40px 30px 20px 40px;border:1px #F2F2F2 solid ;">
+        <h1 style="color:#878888;font-weight: 400; line-height: 30px; font-size: 26px; text-align: left;">尊敬的
+            <i style="color: #B18767;"><%= admin %></i>
+        </h1>
+        <div style="margin-bottom: 20px;color: #3E3E3E; font-weight: 400; line-height: 24px; font-size: 14px; text-align: left;border:1px #F2F2F2 solid ;">
+            <p>您好:</p>
+
+            <p>用户<i style="color: #B18767;"><%= user %> </i>于
+                <%= sendDate %>
+                注册了GMTool系统,请您到<a href="<%= redirectUrl %>">GMTool</a>系统中检查，如果符合要求，请为他开放操作权限</p>
+        </div>
+    </div>
+</div>

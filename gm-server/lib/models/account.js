@@ -2,6 +2,8 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var dbConn = require('../dbConn');
+var Promise = require("bluebird");
+
 
 var Account = module.exports;
 
@@ -18,12 +20,16 @@ var accountSchema = new Schema({
         type: String,
         required: false
     },
-    password: {
-        type: String,
-        required: true
-    },
+    /*  password: {
+     type: String,
+     required: true
+     },*/
     role: {
         type: String,
+        required: false
+    },
+    blocked: {
+        type: Boolean,
         required: false
     }
 }, {
@@ -75,6 +81,68 @@ Account.login = function (userName, password, callback) {
     });
 };
 
+//user for test
+Account.testInsert = function () {
+    for (var i = 2; i < 100; i++) {
+        var uid = new mongoose.Types.ObjectId().toString();
+        user = new AccountModel({
+            uid: uid,
+            openId: uid,
+            userName: 'jin' + i,
+            password: '"2b11cd7edab90933e90abf7a08e134b930a7bd3cfa511747a9358ed1aaf254c1"',
+            name: 'jin' + i,
+            role: 'Observer',
+            blocked: false
+        });
+        user.save()
+    }
+};
+
+Account.getAccounts = function (data) {
+    var searchInfo = JSON.parse(data.query);
+    var searchModel = {};
+    searchInfo.type === 'blocked'
+        ? searchModel[searchInfo.type] = searchInfo.search
+        : searchModel[searchInfo.type] = new RegExp(searchInfo.search, 'i');
+    var sortData = {};
+    sortData[data.OrderBy] = data.Desc == true ? -1 : 1;
+    //TODO: is two find OK?
+    return AccountModel.find({name: {$exists: true}}).find(searchModel).sort(sortData).skip((data.PageIndex - 1) * data.PageSize).limit(data.PageSize * 1)
+};
+
+Account.getAllAccounts = function (data) {
+    var sortData = {};
+    sortData[data.OrderBy] = data.Desc == true ? -1 : 1;
+    return AccountModel.find({name: {$exists: true}}).sort(sortData).skip((data.PageIndex - 1) * data.PageSize).limit(data.PageSize * 1)
+};
+
+Account.getAccountNum = function (data) {
+    if (!!data) {
+        var searchInfo = JSON.parse(data.query);
+        var searchModel = {};
+        searchInfo.type === 'blocked'
+            ? searchModel[searchInfo.type] = searchInfo.search
+            : searchModel[searchInfo.type] = new RegExp(searchInfo.search, 'i');
+        return AccountModel.find(searchModel).count()
+    }
+    return new Promise(function (resolve, reject) {
+        AccountModel.find({}).count(function (err, count) {
+            if (err) {
+                return reject(err)
+            }
+            return resolve(count)
+        });
+    })
+};
+
+Account.updateAccount = function (uid, updateObj) {
+    return new Promise(function (resolve, reject) {
+        AccountModel.findOneAndUpdate({uid: uid}, updateObj, {upsert: false}, function (err, doc) {
+            if (err)return reject(err);
+            return resolve()
+        })
+    })
+};
 
 Account.findUser = function (userName, callback) {
     AccountModel.findOne({
@@ -100,15 +168,32 @@ Account.register = function (uInfo, callback) {
 
     tempPwd += salt;
     shaSum.update(tempPwd);
+    var user;
+    if (uInfo.role == 'Admin') {
+        user = new AccountModel({
+            uid: uid,
+            openId: uid,
+            userName: uInfo.userName,
+            password: shaSum.digest('hex'),
+            email: uInfo.email,
+            emailPwd: uInfo.emailPwd,
+            SMTPHost: uInfo.SMTPHost,
+            SMTPPort: uInfo.SMTPPort,
+            role: uInfo.role
+        });
+    }
+    else {
+        user = new AccountModel({
+            uid: uid,
+            openId: uid,
+            userName: uInfo.userName,
+            password: shaSum.digest('hex'),
+            name: uInfo.name,
+            role: uInfo.role,
+            blocked: uInfo.blocked
+        });
+    }
 
-    var user = new AccountModel({
-        uid: uid,
-        openId: uid,
-        userName: uInfo.userName,
-        password: shaSum.digest('hex'),
-        name: uInfo.name,
-        role: uInfo.role
-    });
 
     user.save(function (err) {
         if (!!err) {
