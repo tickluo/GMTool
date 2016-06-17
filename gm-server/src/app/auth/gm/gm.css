@@ -1,50 +1,74 @@
-.dynamic-list {
-    margin: 20px auto;
-    padding: 0;
-    width: 500px;
-}
-.dynamic-list .add, .dynamic-list ol li {
-    color: #FFF;
-    font-size: 1.5em;
-    font-weight: bold;
-    letter-spacing: 0.1em;
-    padding: 1em;
-    background-color: grey;
-    cursor: pointer;
-    user-select: none;
-}
-.dynamic-list .add {
-    margin: 0;
-    text-align: center;
-}
-.dynamic-list ol {
+.dynamic-list ul {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     list-style: none;
+    /*margin: 30px auto;*/
     padding: 0;
-    margin: 0;
+    width: 300px;
 }
-.dynamic-list ol li {
-    transition: all 1s ease-out;
-    -webkit-transform: scale(1);
-    max-height: 500px;
-    height: auto;
+.dynamic-list ul li {
+    padding: 15px;
 }
-.dynamic-list ol li:nth-child(1) {
-    background-color: #26A8DE;
+.dynamic-list ul li:not(:last-child) {
+    border-bottom: 1px solid #ddd;
 }
-.dynamic-list ol li:nth-child(2) {
-    background-color: #27E99E;
+.dynamic-list ul li.new-item {
+    -webkit-animation: new-item-animation .2s linear forwards;
+    animation: new-item-animation .2s linear forwards;
 }
-.dynamic-list ol li:nth-child(3) {
-    background-color: #FEF035;
+.dynamic-list ul li.removed-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    -webkit-animation: removed-item-animation 0.3s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
+    animation: removed-item-animation 0.3s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
 }
-.dynamic-list ol li:nth-child(4) {
-    background-color: #FC3751;
+.dynamic-list ul li .remove {
+    float: right;
+    cursor: pointer;
 }
-.dynamic-list ol li:nth-child(5) {
-    background-color: #EA212D;
+
+
+@-webkit-keyframes new-item-animation {
+    0% {
+        opacity: 0;
+        -webkit-transform: translatey(50px);
+        transform: translatey(50px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translatey(0);
+        transform: translatey(0);
+    }
 }
-.dynamic-list ol li.new {
-    -webkit-transform: scale(0);
-    height: 0;
-    padding: 100px;
+
+@keyframes new-item-animation {
+    0% {
+        opacity: 0;
+        -webkit-transform: translatey(50px);
+        transform: translatey(50px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translatey(0);
+        transform: translatey(0);
+    }
+}
+@-webkit-keyframes removed-item-animation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translatex(290px);
+        transform: translatex(290px);
+    }
+}
+@keyframes removed-item-animation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translatex(290px);
+        transform: translatex(290px);
+    }
 }

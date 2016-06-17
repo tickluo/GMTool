@@ -11,7 +11,6 @@ app.appModule = angular.module('myApp', [
     'myApp.directive',
     'myApp.component',
     'ui.router',
-    'myApp.version',
     'myApp.const',
     'ngMaterial',
     'ngCookies',

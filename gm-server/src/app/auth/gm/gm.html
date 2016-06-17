@@ -50,7 +50,7 @@
                     <md-toolbar md-scroll-shrink>
                         <div class="md-toolbar-tools">
                             <h3>
-                                <span>公告</span>
+                                <span style="color:white;">公告</span>
                             </h3>
                         </div>
                     </md-toolbar>
@@ -70,16 +70,110 @@
             </md-content>
         </md-tab>
         <md-tab label="邮件">
-            <md-content class="md-padding">
-                <div class="dynamic-list">
-                    <ol>
-                        <li ng-repeat="item in ctrl.attenchments track by $index">
-                            {{item}}
-                        </li>
-                    </ol>
-                </div>
-                <md-button ng-click="ctrl.addAttachment()" class="md-raised">添加</md-button>
-            </md-content>
+            <div layout="row">
+                <md-content flex="40" layout-padding style="width: 80%; background-color:#F8F8F8;">
+                    <md-toolbar md-scroll-shrink>
+                        <div class="md-toolbar-tools">
+                            <h3>
+                                <span style="color:white;">公告</span>
+                            </h3>
+                        </div>
+                    </md-toolbar>
+                    <md-input-container class="combo-button">
+                        <label>标题</label>
+                        <input ng-model="user.title">
+                    </md-input-container>
+                    <md-input-container class="md-block" style="min-width: 100%;">
+                        <label>内容</label>
+                            <textarea ng-model="ctrl.announcement.content" md-maxlength="1000" rows="10"
+                                      md-select-on-focus></textarea>
+                    </md-input-container>
+                    <div layout="row" layout-align="end end">
+                        <md-button class="md-raised md-primary" style="color:white;">发送</md-button>
+                        <md-button class="md-raised">保存</md-button>
+                    </div>
+                </md-content>
+                <md-card flex="30">
+                    <md-toolbar md-scroll-shrink>
+                        <div class="md-toolbar-tools">
+                            <h3>
+                                <span style="color:white;">选择玩家</span>
+                            </h3>
+                        </div>
+                    </md-toolbar>
+                    <div layout="row" layout-align="center center">
+                        <md-input-container>
+                            <label>玩家类型</label>
+                            <md-select ng-model="ctrl.selectPlayerType">
+                                <md-option ng-repeat="select in ctrl.selectPlayerTypes" value="{{select}}">
+                                    {{select}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <!-- <md-input-container class="combo-button">
+                             <label>数量</label>
+                             <input ng-model="ctrl.attachmentCount">
+                         </md-input-container>-->
+                        <md-button ng-click="ctrl.addPlayerRule()" class="md-raised">添加</md-button>
+                    </div>
+                    <div style="padding: 0 0 0 10px">
+                        <range-slider min="1" max="100" step="1" lower-value="ctrl.minLevel" upper-value="ctrl.maxLevel"
+                                      gap="gap"></range-slider>
+                        <p>{{ctrl.minLevel}} {{ctrl.maxLevel}}</p>
+                    </div>
+
+                    <div class="dynamic-list">
+                        <ul>
+                            <li ng-class="{'removed-item':item.rmActive}" class="new-item"
+                                ng-repeat="item in ctrl.playerRules">
+                                {{item.type}}:{{item.minLevel}}-{{item.maxLevel}}
+                                <md-icon ng-click="ctrl.removePlayerRule(item.itemId)" class="remove"
+                                         md-svg-src="asset/svg/close.svg"></md-icon>
+                            </li>
+                        </ul>
+                    </div>
+                </md-card>
+                <md-card flex>
+                    <md-toolbar md-scroll-shrink>
+                        <div class="md-toolbar-tools">
+                            <h3>
+                                <span style="color:white;">选择附件</span>
+                            </h3>
+                        </div>
+                    </md-toolbar>
+                    <div layout="row" layout-align="start center">
+                        <md-input-container>
+                            <label>附件类型</label>
+                            <md-select ng-model="ctrl.selectAttachmentType">
+                                <md-option ng-repeat="select in ctrl.selectAttachmentTypes" value="{{select}}">
+                                    {{select}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="combo-button">
+                            <label>Id</label>
+                            <input ng-model="ctrl.attachmentId">
+                        </md-input-container>
+                        <md-input-container class="combo-button">
+                            <label>数量</label>
+                            <input ng-model="ctrl.attachmentCount">
+                        </md-input-container>
+                        <md-button ng-click="ctrl.addAttachment()" class="md-raised">添加</md-button>
+                    </div>
+                    <div class="dynamic-list">
+                        <ul>
+                            <li ng-class="{'removed-item':item.rmActive}" class="new-item"
+                                ng-repeat="item in ctrl.attenchments">
+                                {{item.type}}:{{item.id}}添加{{item.count}}个
+                                <md-icon ng-click="ctrl.removeAttachment(item.itemId)" class="remove"
+                                         md-svg-src="asset/svg/close.svg"></md-icon>
+                            </li>
+                        </ul>
+                    </div>
+                </md-card>
+            </div>
         </md-tab>
     </md-tabs>
 </div>
+

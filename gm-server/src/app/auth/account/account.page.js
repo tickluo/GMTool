@@ -15,7 +15,7 @@ app.appModule
             context.selectQuery = '';
             context.query = '';
             context.selectQuerys = ['userName', 'name', 'role', 'blockedMsg'];
-            context.selectQuerysMsg = ['用户名', '名称', '角色', '状态'];
+            context.selectAttachmentTypes = ['用户名', '名称', '角色', '状态'];
 
             context.fetchSearch = function () {
                 if (context.selectQuery === '状态') {
@@ -26,7 +26,7 @@ app.appModule
                 }
                 else {
                     postData.query = {
-                        type: context.selectQuerys[context.selectQuerysMsg.indexOf(context.selectQuery)],
+                        type: context.selectQuerys[context.selectAttachmentTypes.indexOf(context.selectQuery)],
                         search: context.query
                     };
                 }
