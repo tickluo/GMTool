@@ -8,7 +8,7 @@ var utility = module.exports;
 utility.generatePostOption = function(url, data){
     var options = {
         url: url,
-       /* ca: security.tlsCa,
+        /*ca: security.tlsCa,
         key: security.tlsKey,
         cert: security.tlsCert,*/
         form: data

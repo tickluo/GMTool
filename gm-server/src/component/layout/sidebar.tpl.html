@@ -1,36 +1,19 @@
-<!--<md-sidenav  md-is-locked-open="$mdMedia('gt-sm')" md-component-id="primaryLeft" class="md-whiteframe-4dp md-sidenav-left">-->
-<md-sidenav style="background-color: #424242"  md-component-id="sidebarLeft" class="md-whiteframe-4dp md-sidenav-left" >
-        <md-toolbar class="md-whiteframe-z2 md-hue-2" layout-align="center center">
-            {{ctrl.user.role}}.{{ctrl.user.userName}}
-        </md-toolbar>
-        <md-button layout="row" layout-align="center center" class="md-toolbar-tools nav-item"
-                   ui-sref="layout.auth.user">
-            <h1>玩家管理</h1>
-        </md-button>
-        <md-divider ng-if="!$last"></md-divider>
-        <!--<md-button layout="row" layout-align="center center" class="md-toolbar-tools nav-item"
-                   ui-sref="layout.auth.view2">
-            <h1>Setting</h1>
-        </md-button>
-        <md-divider ng-if="!$last"></md-divider>
-        <md-button layout="row" layout-align="center center" class="md-toolbar-tools nav-item"
-                   ui-sref="layout.auth.view2">
-            <h1>VIEW2</h1>
-        </md-button>-->
+<md-sidenav md-is-locked-open="ctrl.toggle" style="background-color: #424242;"
+            md-component-id="sidebarLeft" class="md-whiteframe-4dp md-sidenav-left">
+
+    <md-button layout="row" layout-align="center center" class="md-toolbar-tools nav-item"
+               ui-sref="layout.auth.user">
+        <h1>玩家管理</h1>
+    </md-button>
+    <md-divider ng-if="!$last"></md-divider>
     <md-button ng-repeat-start="item in ctrl.menuItems" layout="row" layout-align="center center"
                class="md-toolbar-tools nav-item" ui-sref="{{item.sref}}">
-            <div hide-sm hide-md class="md-tile-content">
-                <i class="material-icons md-36">{{item.icon}}</i>
-            </div>
-            <div class="md-tile-content">
-                {{item.name}}
-            </div>
-        </md-button>
-        <md-divider ng-repeat-end></md-divider>
-
-    <!-- <md-button ng-click="vm.showActions($event)" layout-align="center center">
-         <div class="md-tile-content">
-             Actions
-         </div>
-     </md-button>-->
+        <div hide-sm hide-md class="md-tile-content">
+            <i class="material-icons md-36">{{item.icon}}</i>
+        </div>
+        <div class="md-tile-content">
+            {{item.name}}
+        </div>
+    </md-button>
+    <md-divider ng-repeat-end></md-divider>
 </md-sidenav>

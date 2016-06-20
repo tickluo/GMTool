@@ -1,0 +1,35 @@
+<div ng-controller="settingCtrl as ctrl" layout="column" layout-align="center center">
+    <md-card layout="column" class="md-inline-form" style=" width: 50%; background-color:#F8F8F8;">
+        <md-toolbar md-scroll-shrink>
+            <div class="md-toolbar-tools">
+                <h3>
+                    <span style="color:white;">管理员设置</span>
+                </h3>
+            </div>
+        </md-toolbar>
+        <div layout="column" layout-padding style="background-color:#F8F8F8;">
+            <md-input-container class="combo-button">
+                <label>accSvrURL</label>
+                <input ng-model="ctrl.setting.v">
+            </md-input-container>
+            <md-input-container class="combo-button">
+                <label>SMTP host</label>
+                <input ng-model="ctrl.setting.SMTPHost">
+            </md-input-container>
+            <md-input-container class="combo-button">
+                <label>SMTP port</label>
+                <input ng-model="ctrl.setting.SMTPPort">
+            </md-input-container>
+            <md-input-container class="combo-button">
+                <label>email</label>
+                <input ng-model="ctrl.setting.email">
+            </md-input-container>
+            <md-input-container class="combo-button">
+                <label>email password</label>
+                <input ng-model="ctrl.setting.emailPwd">
+            </md-input-container>
+        </div>
+    </md-card>
+    <md-button ng-click="ctrl.updateSetting()" class="md-raised">更新</md-button>
+</div>
+

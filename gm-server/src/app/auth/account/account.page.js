@@ -88,6 +88,7 @@ app.appModule
                         displayName: '状态',
                         field: 'blockedMsg',
                         enableSorting: true,
+                        /*cellTemplate:' <md-button ng-class="{\'md-warn\':!blocked}" class="md-raised md-hue-2" ng-click="blockAccount()">{{blocked?\'解禁\':\'封禁\'}} </md-button>'*/
                         cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
                             if (grid.getCellValue(row, col) === '封禁') {
                                 return 'gridCol-red';

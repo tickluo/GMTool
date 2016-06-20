@@ -71,7 +71,7 @@ Setting.save = function (key, value, cb) {
                 emailPwd: value.emailPwd,
                 SMTPHost: value.SMTPHost,
                 SMTPPort: value.SMTPPort,
-                v: value.url
+                v: value.v
             }
         }, {
             upsert: true

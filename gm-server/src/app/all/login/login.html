@@ -2,11 +2,11 @@
     <div class="container">
         <h1>Welcome to GMTool</h1>
 
-        <form class="login-form"  ng-submit="ctrl.submitLogin()"
+        <form class="login-form" validation-Form ng-submit="ctrl.submitLogin()"
               ng-hide="ctrl.hideLoginForm"
               ng-class="{fade:ctrl.startFade}">
-            <input type="text" ng-model="ctrl.user.userName" required placeholder="Username">
-            <input type="text" ng-model="ctrl.user.password" required placeholder="Password">
+            <input type="text" ng-model="ctrl.user.userName" name="login_account" validate-required="账号不能为空" placeholder="Username">
+            <input type="text" ng-model="ctrl.user.password" name="login_pwd"  placeholder="Password" validate-required="密码不能为空" >
             <button type="submit">Login</button>
         </form>
 

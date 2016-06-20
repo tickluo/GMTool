@@ -8,7 +8,7 @@ app.appModule
         '$state',
         'authService',
         function ($timeout, $state, authService) {
-            if(authService.isAuthenticated()){
+            if (authService.isAuthenticated()) {
                 $state.go('layout.auth.user');
             }
 
@@ -18,29 +18,27 @@ app.appModule
             this.formTip = 'sign up';
             this.toggleForm = angular.bind(this, toggleForm);
             this.submitLogin = angular.bind(this, startLogin, $timeout, $state, authService);
-            this.submitSignUp = angular.bind(this, signUp, authService, $state,$timeout);
+            this.submitSignUp = angular.bind(this, signUp, authService, $state, $timeout);
         }]);
 
 
 function startLogin($timeout, $state, authService) {
     var context = this;
     authService.login(context.user)
-        .then(
-            function (res) {
-                if (res) {
-                    context.startFade = true;
-                    context.startLogin = true;
-                    context.hideLoginForm = true;
-                    context.hideTipForm = true;
-                    $timeout(function () {
-                        $state.go('layout.auth.user');
-                    }, 2000);
-                }
-                else {
-
-                }
-
-            })
+        .then(function (res) {
+            if (res) {
+                context.startFade = true;
+                context.startLogin = true;
+                context.hideLoginForm = true;
+                context.hideTipForm = true;
+                $timeout(function () {
+                    $state.go('layout.auth.user');
+                }, 2000);
+            }
+        })
+        .catch(function (err) {
+            alert(err.data.msg)
+        })
 }
 
 function signUp(authService, $state, $timeout) {

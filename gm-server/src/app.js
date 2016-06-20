@@ -87,7 +87,7 @@ app.appModule
                 })
                 .state('layout.auth.setting', {
                     url: '/setting',
-                    templateUrl: 'app/auth/view2/view2.html'
+                    templateUrl: 'app/auth/setting/setting.html'
                 });
 
             $urlRouterProvider.otherwise('/auth/user')

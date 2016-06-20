@@ -9,6 +9,12 @@ app.webServiceModule
             return {
                 fetchAstSvrList: function (model) {
                     return apiService.getMock('/authApi/setting/astSvrList', model);
+                },
+                getAdminSetting: function (model) {
+                    return apiService.get('/authApi/setting/getConfig', model);
+                },
+                updateAdminSetting: function (model) {
+                    return apiService.post('/authApi/setting/updateConfig', model);
                 }
             }
         }]);

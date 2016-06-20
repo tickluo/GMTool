@@ -12,16 +12,18 @@ app.appModule
     }]);
 
 
-function navCtrl($mdSidenav) {
+function navCtrl($mdSidenav, eventService,sidebarService) {
     var context = this;
 
     context.toggleSidebar = toggleSidebar;
-/*    context.isOpenSidebar = isOpenSidebar;
-    function isOpenSidebar() {
-        return $mdSidenav('sidebarLeft').isOpen();
-    }*/
+    /*    context.isOpenSidebar = isOpenSidebar;
+     function isOpenSidebar() {
+     return $mdSidenav('sidebarLeft').isOpen();
+     }*/
 
     function toggleSidebar() {
-        $mdSidenav('sidebarLeft').toggle();
+        /*$mdSidenav('sidebarLeft').toggle();*/
+        sidebarService.toggleSidebar();
+        eventService.trigger('toggleSidebar',sidebarService.getToggle() );
     }
 }

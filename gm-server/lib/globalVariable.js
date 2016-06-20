@@ -10,6 +10,7 @@ var async = require('async');
 
 
 info.accountServerURL = '';
+info.astServerURL =
 info.astServerURLMap = {}; // key : id, value: URL
 info.accSvrURLKey = 'accSvrURL';
 info.emailConfig = {}; //send email config{SMTP,}
@@ -24,13 +25,13 @@ info.setAccountServer = function (url) {
 
 info.setEmailConfig = function (config) {
     return !!config ? info.emailConfig = {
-        host:config.SMTPHost,
-        port:config.SMTPPort,
-        connectionTimeout : "7000",
-        greetingTimeout : "7000",
+        host: config.SMTPHost,
+        port: config.SMTPPort,
+        connectionTimeout: "7000",
+        greetingTimeout: "7000",
         /*secure: true,*/
         tls: {
-            rejectUnauthorized:false
+            rejectUnauthorized: false
         },
         auth: {
             user: config.email,
@@ -41,11 +42,11 @@ info.setEmailConfig = function (config) {
 
 
 info.addAstServer = function (id, url) {
-    if (!!info.astServerURLMap[id]) {
-        delete info.astServerURLMap[id];
-    }
-    info.astServerURLMap[id] = url;
-};
+ if (!!info.astServerURLMap[id]) {
+ delete info.astServerURLMap[id];
+ }
+ info.astServerURLMap[id] = url;
+ };
 
 info.getAstServer = function (id) {
     return info.astServerURLMap[id];

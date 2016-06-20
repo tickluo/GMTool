@@ -48,7 +48,7 @@ router.post('/setup', function (req, res) {
                 emailPwd: data.emailPwd,
                 SMTPHost: data.SMTPHost,
                 SMTPPort: data.SMTPPort,
-                url:url
+                v:url
             }, cb);
         }
     ], function (err) {

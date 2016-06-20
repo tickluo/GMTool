@@ -7,7 +7,7 @@ app.serviceModule.factory('sidebarService', [
     'authService',
     '$q',
     function ($http, authService, $q) {
-
+        var toggle = true;
         return {
             getAuthMenu: function () {
                 var originalMenu = [
@@ -18,6 +18,12 @@ app.serviceModule.factory('sidebarService', [
                     originalMenu.push({name: item, sref: 'layout.auth.' + item});
                 });
                 return originalMenu
+            },
+            toggleSidebar: function () {
+                toggle = !toggle;
+            },
+            getToggle: function () {
+                return toggle;
             }
         }
     }]);

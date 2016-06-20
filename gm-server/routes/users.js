@@ -54,9 +54,12 @@ router.post('/login', function (req, res) {
     var user = req.body;
     auth.checkAuth(req, user.userName, user.password, function (err, userInfo) {
         if (err) {
-            res.send({code: 401, msg: err});
+            res.status(401).send({msg: err.message});
         }
         else {
+            if (userInfo.blocked) {
+                return res.status(401).send({msg: "您已被封禁！"})
+            }
             var token = uuid.v4();
             userInfo.isAuthenticated = true;
             sessionContaner[token] = userInfo;

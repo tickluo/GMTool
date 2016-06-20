@@ -123,10 +123,10 @@ Account.getAccountNum = function (data) {
         searchInfo.type === 'blocked'
             ? searchModel[searchInfo.type] = searchInfo.search
             : searchModel[searchInfo.type] = new RegExp(searchInfo.search, 'i');
-        return AccountModel.find(searchModel).count()
+        return AccountModel.find({name: {$exists: true}}).find(searchModel).count()
     }
     return new Promise(function (resolve, reject) {
-        AccountModel.find({}).count(function (err, count) {
+        AccountModel.find({name: {$exists: true}}).count(function (err, count) {
             if (err) {
                 return reject(err)
             }

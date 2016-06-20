@@ -6,19 +6,35 @@ app.appModule
     .controller('userCtrl', [
         'uiGridConstants',
         'authService',
-        function (uiGridConstants, authService) {
+        'userWebService',
+        function (uiGridConstants, authService, userWebService) {
+            var context = this;
+
+            context.searchNuid = '';
             //TODO:click search then set disable
-            this.hasAuth = authService.getAuthorities().indexOf('gm') < 0;
+            context.hasAuth = authService.getAuthorities().indexOf('gm') < 0;
+            context.searchPlayer = function () {
+                var searchInfo = {
+                    nuid: context.searchNuid
+                };
+                userWebService.getPlayer(searchInfo)
+                    .then(function (data, status, headers, config) {
+                        context.user = data;
+                    })
+                    .catch(function (err) {
+                        context.user = {};
+                    });
+            };
 
-            this.selectOption = [
-                'UId',
-                'NumberId',
-                'OpenId',
-                'AccountName',
-                'NickName'
-            ];
+            /*context.selectOption = [
+             'UId',
+             'NumberId',
+             'OpenId',
+             'AccountName',
+             'NickName'
+             ];*/
 
-            this.spiritGrid = {
+            context.spiritGrid = {
                 columnDefs: [
                     {displayName: '元神Name', field: 'name'},
                     {displayName: '元神Id', field: 'id', enableSorting: false},
@@ -37,7 +53,7 @@ app.appModule
                 }]
             };
 
-            this.magicGrid = {
+            context.magicGrid = {
                 columnDefs: [
                     {displayName: '法宝Id', field: 'id', enableSorting: false},
                     {displayName: '数量', field: 'count', enableSorting: false}
@@ -45,7 +61,7 @@ app.appModule
                 data: [{id: 1, count: 3}, {id: 2, count: 2}, {id: 3, count: 4}]
             };
 
-            this.itemGrid = {
+            context.itemGrid = {
                 columnDefs: [
                     {displayName: '道具Id', field: 'id', enableSorting: false},
                     {displayName: '数量', field: 'count', enableSorting: false}
@@ -53,7 +69,7 @@ app.appModule
                 data: [{id: 1, count: 3}, {id: 2, count: 2}, {id: 3, count: 4}]
             };
 
-            this.skillGrid = {
+            context.skillGrid = {
                 columnDefs: [
                     {displayName: '技能Name', field: 'name'},
                     {displayName: '技能Id', field: 'id', enableSorting: false},
@@ -66,7 +82,7 @@ app.appModule
                 }]
             };
 
-            this.equipGrid = {
+            context.equipGrid = {
                 columnDefs: [
                     {displayName: '装备栏位', field: 'position'},
                     {displayName: '装备Id', field: 'id', enableSorting: false},

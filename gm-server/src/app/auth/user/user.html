@@ -11,9 +11,9 @@
     <div layout="row" layout-sm="column" layout-align="start center" layout-wrap>
         <md-input-container class="combo-button">
             <label>请输入NumberId</label>
-            <input>
+            <input ng-model="ctrl.searchNuid">
         </md-input-container>
-        <md-button class="md-raised">Search</md-button>
+        <md-button ng-click="ctrl.searchPlayer()" class="md-raised">Search</md-button>
     </div>
 
     <md-tabs md-dynamic-height md-border-bottom>
@@ -21,32 +21,32 @@
             <md-content layout="row" layout-align="center center" class="md-padding">
                 <md-card flex="25">
                     <md-content layout-padding>
-                        <span> 玩家名:{{user.userName}}</span>
+                        <span> 玩家名:{{ctrl.user.userName}}</span>
                         <md-divider></md-divider>
-                        <span> openId:{{user.openId}}</span>
+                        <span> openId:{{ctrl.user.openId}}</span>
                         <md-divider></md-divider>
-                        <span> uid:{{user.uid}}</span>
+                        <span> uid:{{ctrl.user.uid}}</span>
                         <md-divider></md-divider>
-                        <span> 登陆时间: {{user.date}}</span>
+                        <span> 登陆时间: {{ctrl.user.date}}</span>
                         <md-divider></md-divider>
-                        <span> 所在地图ID: {{user.data.areaId}}</span>
+                        <span> 所在地图ID: {{ctrl.user.data.areaId}}</span>
                         <md-divider></md-divider>
-                        <span> 角色名称: {{user.data.nickName}}</span>
+                        <span> 角色名称: {{ctrl.user.data.nickName}}</span>
                         <md-divider></md-divider>
-                        <span> 等级: {{user.data.level}}</span>
+                        <span> 等级: {{ctrl.user.data.level}}</span>
                         <md-divider></md-divider>
-                        <span> 角色AvatarID:{{user.data.avatarId}}</span>
+                        <span> 角色AvatarID:{{ctrl.user.data.avatarId}}</span>
                         <md-divider></md-divider>
-                        <span> 签到信息:{{user.data.signin}}</span>
+                        <span> 签到信息:{{ctrl.user.data.signin}}</span>
                         <md-divider></md-divider>
-                        <span> 签到时间:{{getLocalTime(user.data.signin)}}</span>
+                        <span> 签到时间:{{getLocalTime(ctrl.user.data.signin)}}</span>
                         <md-divider></md-divider>
-                        <span> 体力:{{user.data.energy.count}}</span>
+                        <span> 体力:{{ctrl.user.data.energy.count}}</span>
                         <md-divider></md-divider>
-                        <span> 新手引导:{{user.data.guideStep}}</span>
+                        <span> 新手引导:{{ctrl.user.data.guideStep}}</span>
                     </md-content>
                 </md-card>
-                <md-card layout="column" class="md-padding" layout-align="center center" flex  ng-hide="ctrl.hasAuth">
+                <md-card layout="column" class="md-padding" layout-align="center center" flex  ng-if="!ctrl.hasAuth">
                     <div layout="row" layout-align="start center">
                         <md-input-container class="combo-button">
                             <label>通关关卡</label>
@@ -85,7 +85,7 @@
         </md-tab>
         <md-tab label="元神">
             <md-content class="md-padding">
-                <div layout="row" layout-align="start center"   ng-hide="ctrl.hasAuth">
+                <div layout="row" layout-align="start center"   ng-if="!ctrl.hasAuth">
                     <md-input-container class="combo-button">
                         <label>元神Id</label>
                         <input ng-model="user.title">
@@ -98,7 +98,7 @@
         </md-tab>
         <md-tab label="法宝">
             <md-content class="md-padding">
-                <div layout="row" layout-align="start center"   ng-hide="ctrl.hasAuth">
+                <div layout="row" layout-align="start center"   ng-if="!ctrl.hasAuth">
                     <md-input-container class="combo-button">
                         <label>法宝Id</label>
                         <input ng-model="user.title">
@@ -115,7 +115,7 @@
         </md-tab>
         <md-tab label="道具">
             <md-content class="md-padding">
-                <div layout="row" layout-align="start center"  ng-hide="ctrl.hasAuth">
+                <div layout="row" layout-align="start center"  ng-if="!ctrl.hasAuth">
                     <md-input-container class="combo-button">
                         <label>道具Id</label>
                         <input ng-model="user.title">
@@ -132,7 +132,7 @@
         </md-tab>
         <md-tab label="技能">
             <md-content class="md-padding">
-                <div layout="row" layout-align="start center"  ng-hide="ctrl.hasAuth">
+                <div layout="row" layout-align="start center"  ng-if="!ctrl.hasAuth">
                     <md-input-container class="combo-button">
                         <label>技能Id</label>
                         <input ng-model="user.title">

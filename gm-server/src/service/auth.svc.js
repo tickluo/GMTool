@@ -19,21 +19,13 @@ app.serviceModule
 
             function genAuthByRole(blocked, role) {
                 authorities = [];
-                !!blocked || role === 'Observer' || authorities.push('gm');
+                role === 'Observer' || authorities.push('gm');
                 role === 'Admin' && authorities.push('account') && authorities.push('setting');
             }
 
             return {
                 login: function (user) {
                     return authWebService.login(user).then(function (res) { //res: {code,msg,data}
-                        if (res.data.code === 401) {
-                            /* userInfo = res.data;
-                             userInfo.avatar = avatarConst[res.data.role];*/
-                            /* authorities = res.data.authorities;*/
-                            alert(res.data.msg);
-                            return false;
-                        }
-
 
                         /*set token*/
                         var expires = new Date();
